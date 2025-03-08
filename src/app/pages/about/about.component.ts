@@ -1,11 +1,14 @@
 import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { QuestionsComponent } from '../../shared/questions/questions.component';
+import { RatingsComponent } from '../../shared/ratings/ratings.component';
 
 @Component({
   selector: 'app-about',
-  imports: [],
+  standalone: true,
+  imports: [CommonModule, RatingsComponent],
   templateUrl: './about.component.html',
-  styleUrl: './about.component.css'
 })
 export class AboutComponent {
-
+  email = 'sadgisileather@gmail.com';
 }

@@ -2,22 +2,40 @@
   class="flex justify-between items-center header rounded-[56px] px-[40px] mt-[30px] w-[1260px] max-[1260px]:w-[90%] mx-auto"
 >
   <img
+    routerLink="/"
     class="w-[80px] h-[80px] max-lg:w-[54px] max-lg:h-[54px] cursor-pointer"
     src="assets/sadgisilogo.png"
     alt="logo"
   />
   <nav class="max-[1260px]:hidden">
     <ul class="flex gap-7">
-      <li class="cursor-pointer hover:text-[#5086EE] text-[18px] font-normal">
+      <li
+        routerLink="/"
+        routerLinkActive="text-[#5086EE]"
+        [routerLinkActiveOptions]="{ exact: true }"
+        class="cursor-pointer hover:text-[#5086EE] text-[18px] font-normal"
+      >
         მთავარი
       </li>
-      <li class="cursor-pointer hover:text-[#5086EE] text-[18px] font-normal">
+      <li
+        routerLink="/products"
+        routerLinkActive="text-[#5086EE]"
+        class="cursor-pointer hover:text-[#5086EE] text-[18px] font-normal"
+      >
         პროდუქცია
       </li>
-      <li class="cursor-pointer hover:text-[#5086EE] text-[18px] font-normal">
+      <li
+        routerLink="/about"
+        routerLinkActive="text-[#5086EE]"
+        class="cursor-pointer hover:text-[#5086EE] text-[18px] font-normal"
+      >
         ჩვენს შესახებ
       </li>
-      <li class="cursor-pointer hover:text-[#5086EE] text-[18px] font-normal">
+      <li
+        routerLink="/order"
+        routerLinkActive="text-[#5086EE]"
+        class="cursor-pointer hover:text-[#5086EE] text-[18px] font-normal"
+      >
         შეკვეთა
       </li>
     </ul>
