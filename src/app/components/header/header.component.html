@@ -56,16 +56,16 @@
       src="assets/shopping-cart.png"
       alt="cart"
     />
-    <img
-      class="cursor-pointer w-[28px] h-[28px] max-[1260px]:hidden"
-      src="assets/profile-circle.png"
-      alt="profile"
-    />
-    <img
-      class="cursor-pointer w-[28px] h-[28px] min-[1260px]:hidden"
-      src="assets/burger.png"
-      alt="burger"
-    />
+    <a [routerLink]="profileLink" class="text-xl hidden md:block">
+      <i class="fa-regular fa-user"></i>
+    </a>
+    <button (click)="toggleSidebar()">
+      <img
+        class="cursor-pointer w-[28px] h-[28px] min-[1260px]:hidden"
+        src="assets/burger.png"
+        alt="burger"
+      />
+    </button>
   </div>
 </header>
 <!-- <div

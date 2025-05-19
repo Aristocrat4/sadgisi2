@@ -1,0 +1,110 @@
+<!-- Overlay -->
+<div
+  class="fixed inset-0 bg-black bg-opacity-50 z-40 transition-opacity duration-300"
+  [class.opacity-0]="!isOpen"
+  [class.pointer-events-none]="!isOpen"
+  (click)="closeSidebar()"
+></div>
+
+<!-- Sidebar -->
+<div
+  class="fixed left-0 top-0 bottom-0 w-[80%] max-w-[300px] bg-white z-50 transform transition-transform duration-300 ease-in-out overflow-y-auto overflow-x-hidden"
+  [class.translate-x-0]="isOpen"
+  [class.translate-x-[-100%]]="!isOpen"
+>
+  <div class="p-8">
+    <div class="flex justify-between items-center mb-6">
+      <h2 class="text-xl font-bold">მენიუ</h2>
+      <button (click)="closeSidebar()" class="text-gray-500">
+        <i class="fas fa-times text-xl"></i>
+      </button>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="mt-10 mb-6">
+      <ul class="flex flex-col gap-6">
+        <li>
+          <a
+            (click)="navigateTo('/')"
+            class="flex items-center gap-4 py-3 hover:text-[#4461F2] transition-colors cursor-pointer text-xl text-gray-800"
+          >
+            <i class="fa-solid fa-home w-8 text-center"></i>
+            <span>მთავარი</span>
+          </a>
+        </li>
+        <li>
+          <a
+            (click)="navigateTo('/products')"
+            class="flex items-center gap-4 py-3 hover:text-[#4461F2] transition-colors cursor-pointer text-xl text-gray-800"
+          >
+            <i class="fa-solid fa-box w-8 text-center"></i>
+            <span>პროდუქცია</span>
+          </a>
+        </li>
+        <li>
+          <a
+            (click)="navigateTo('/about')"
+            class="flex items-center gap-4 py-3 hover:text-[#4461F2] transition-colors cursor-pointer text-xl text-gray-800"
+          >
+            <i class="fa-solid fa-info-circle w-8 text-center"></i>
+            <span>ჩვენს შესახებ</span>
+          </a>
+        </li>
+        <li>
+          <a
+            (click)="navigateTo('/order')"
+            class="flex items-center gap-4 py-3 hover:text-[#4461F2] transition-colors cursor-pointer text-xl text-gray-800"
+          >
+            <i class="fa-solid fa-shopping-bag w-8 text-center"></i>
+            <span>შეკვეთა</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+
+    <!-- User Actions -->
+    <div class="mt-8">
+      <div *ngIf="isLoggedIn; else loginButton">
+        <a
+          (click)="navigateTo('/profile/info')"
+          class="flex items-center gap-4 py-3 hover:text-[#4461F2] transition-colors cursor-pointer text-xl text-gray-800"
+        >
+          <i class="fa-regular fa-user w-8 text-center"></i>
+          <span>პროფილი</span>
+        </a>
+        <a
+          (click)="logout()"
+          class="flex items-center gap-4 py-3 hover:text-[#4461F2] transition-colors cursor-pointer text-xl text-gray-800"
+        >
+          <i class="fa-solid fa-arrow-right-to-bracket w-8 text-center"></i>
+          <span>ანგარიშიდან გასვლა</span>
+        </a>
+      </div>
+      <ng-template #loginButton>
+        <a
+          (click)="navigateTo('/auth/sign-in')"
+          class="flex items-center gap-4 py-3 hover:text-[#4461F2] transition-colors cursor-pointer text-xl text-gray-800"
+        >
+          <i class="fa-solid fa-sign-in-alt w-8 text-center"></i>
+          <span>ანგარიშზე შესვლა</span>
+        </a>
+      </ng-template>
+    </div>
+
+    <!-- Additional Icons -->
+    <div class="flex items-center gap-6 mt-8">
+      <a
+        (click)="navigateTo('/favorites')"
+        class="text-gray-800 hover:text-[#4461F2]"
+      >
+        <i class="fa-regular fa-heart text-2xl"></i>
+      </a>
+      <a
+        (click)="navigateTo('/cart')"
+        class="text-gray-800 hover:text-[#4461F2]"
+      >
+        <i class="fa-solid fa-shopping-cart text-2xl"></i>
+      </a>
+    </div>
+  </div>
+</div>
