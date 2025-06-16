@@ -1,0 +1,43 @@
+<div class="flex flex-wrap justify-center gap-1 mt-7 mb-10 md:mt-[30px] md:mb-[32px]">
+  <div
+    class="flex flex-col items-center gap-[15px] border border-[#EDEDED] rounded-[8px] min-w-[185px] md:w-[244px] min-h-[134px] p-4"
+  >
+    <div class="flex flex-col items-center gap-[10px]">
+      <i class="fa-solid fa-cart-shopping w-8"></i>
+      <div class="font-bold text-[16px] text-[#424857]">მიმღები</div>
+    </div>
+    <div class="flex flex-col items-center font-medium text-[13px] text-[#525868]">
+      <div>{{ registerForm?.get('nameAndSurname')?.value || 'მომხმარებელი' }}</div>
+      <div>
+        <span><!-- icon --></span>
+        <span>{{ registerForm?.get('phoneNumber')?.value || '+995 ...' }}</span>
+      </div>
+    </div>
+  </div>
+
+  <div
+    class="flex flex-col items-center gap-[15px] border border-[#EDEDED] rounded-[8px] min-w-[185px] md:w-[244px] min-h-[134px] p-4"
+  >
+    <div class="flex flex-col items-center gap-[10px]">
+      <i class="fa-solid fa-cart-shopping w-8"></i>
+      <div class="font-bold text-[16px] text-[#424857]">ქუჩის მისამართი</div>
+    </div>
+    <div class="flex flex-col items-center font-medium text-[13px] text-[#525868]">
+      <div>{{ registerForm?.get('address')?.value || 'მისამართი' }}</div>
+      <div>ქალაქი: {{ registerForm?.get('city')?.value || 'ქალაქი' }}</div>
+    </div>
+  </div>
+
+  <div
+    class="flex flex-col items-center gap-[15px] border border-[#EDEDED] rounded-[8px] min-w-[185px] md:w-[244px] min-h-[134px] p-4"
+  >
+    <div class="flex flex-col items-center gap-[10px]">
+      <i class="fa-solid fa-cart-shopping w-8"></i>
+      <div class="font-bold text-[16px] text-[#424857]">მიწოდება</div>
+    </div>
+    <div class="flex flex-col items-center font-medium text-[13px] text-[#525868]">
+      <div>20 მარტი, 2024</div>
+      <div>11:00 დან 19:00 საათამდე</div>
+    </div>
+  </div>
+</div>

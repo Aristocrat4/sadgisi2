@@ -8,6 +8,7 @@ import { SignInComponent } from './pages/auth/sign-in/sign-in.component';
 import { RegisterComponent } from './pages/auth/register/register.component';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { ProfileInfoComponent } from './pages/profile/profile-info/profile-info.component';
+import { CheckoutComponent } from './pages/checkout/checkout.component';
 
 export const routes: Routes = [
   {
@@ -30,6 +31,10 @@ export const routes: Routes = [
   {
     path: 'order',
     component: OrderComponent,
+  },
+  {
+    path: 'checkout',
+    component: CheckoutComponent,
   },
   {
     path: 'auth',

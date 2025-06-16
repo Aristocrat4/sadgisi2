@@ -1,0 +1,18 @@
+<div class="flex flex-wrap justify-between gap-[35px] min-h-[710px] md:min-h-[524px] mt-[30px] md:mt-[40px]">
+  <div>
+    <app-checkout-form #formRef></app-checkout-form>
+  </div>
+  <div>
+    <app-basket-total></app-basket-total>
+
+    @if(isStepThree()) {
+<button
+  (click)="submitFromParent()"
+  class="w-full bg-[#4461F2] text-white py-4 rounded-lg font-medium text-lg cursor-pointer mt-[25px]"
+>
+  გადახდა
+</button>
+    }
+
+  </div>
+</div>

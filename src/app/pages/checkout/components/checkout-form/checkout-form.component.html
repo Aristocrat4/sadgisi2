@@ -1,0 +1,183 @@
+<div class="flex flex-col flex-start">
+  
+  <div class="flex items-center space-x-2 mb-8 justify-start">
+    @for (stepName of steps; let idx = $index; track idx) {
+      <button
+        type="button"
+        (click)="goToStep(idx + 1)"
+        class="text-sm md:text-base"
+        [class.font-bold]="currentStep() >= idx + 1"
+        [ngStyle]="{ color: currentStep() === idx + 1 ? '#0A0B26' : '' }"
+      >
+        {{ stepName }}
+      </button>
+      @if (idx < steps.length - 1) {
+        <span>></span>
+      }
+    }
+  </div>
+
+  <div class="flex gap-8">
+    <div class="w-full">
+      <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+        <!-- საკონტაქტო ინფრომაცია -->
+        @if (currentStep() === 1) {
+          <div class="flex flex-wrap gap-[15px]">
+            <div
+              class="w-full max-w-[374px] md:max-w-[740px] flex-shrink flex-grow"
+            >
+              <div class="relative">
+                <input
+                  class="w-full pl-4 pr-4 py-3 rounded-lg bg-gray-50 border border-gray-200"
+                  formControlName="nameAndSurname"
+                  placeholder="სახელი და გვარი"
+                />
+              </div>
+              <ng-container *ngIf="showError('nameAndSurname')">
+                <span class="text-red-500 text-sm mt-1 block">
+                  {{ getErrorMessage("nameAndSurname") }}
+                </span>
+              </ng-container>
+            </div>
+
+            <div class="w-full max-w-[374px] md:max-w-[358px] flex-shrink-0">
+              <div class="relative">
+                <input
+                  class="w-full pl-4 pr-4 py-3 rounded-lg bg-gray-50 border border-gray-200"
+                  formControlName="email"
+                  placeholder="თქვენი იმეილი"
+                />
+              </div>
+              <ng-container *ngIf="showError('email')">
+                <span class="text-red-500 text-sm mt-1 block">
+                  {{ getErrorMessage("email") }}
+                </span>
+              </ng-container>
+            </div>
+
+            <div class="w-full max-w-[374px] md:max-w-[358px] flex-shrink-0">
+              <div class="relative">
+                <input
+                  class="w-full pl-4 pr-4 py-3 rounded-lg bg-gray-50 border border-gray-200"
+                  formControlName="phoneNumber"
+                  placeholder="მობილურის ნომერი"
+                />
+              </div>
+              @if (showError("phoneNumber")) {
+                <span class="text-red-500 text-sm mt-1 block">
+                  {{ getErrorMessage("phoneNumber") }}
+                </span>
+              }
+            </div>
+
+            <div class="max-w-max">
+              <button
+                type="button"
+                class="inline-block w-[374px] md:w-[217px] h-[54px] bg-[#4461F2] text-white rounded-lg font-medium text-lg cursor-pointer"
+                (click)="nextStep()"
+              >
+                შემდეგი
+              </button>
+            </div>
+          </div>
+        }
+
+        <!-- ლოკაცია -->
+        @if (currentStep() === 2) {
+          <div class="flex flex-wrap gap-6">
+            <div class="flex w-full gap-6">
+              <div class="w-1/2">
+              <select
+                formControlName="city"
+                class="w-full px-4 py-3 rounded-lg bg-gray-50 border border-gray-200 appearance-none"
+              >
+                <option value="" disabled selected>ქალაქი</option>
+                @for (city of cities(); track city.value) {
+                <option [value]="city.value">{{ city.label }}</option>
+                }
+              </select>
+              @if (showError('city')) {
+              <span class="text-red-500 text-sm mt-1 block">{{
+                getErrorMessage("city")
+              }}</span>
+              }
+              </div>
+              <div class="w-1/2">
+                <input
+                  type="number"
+                  class="w-full pl-4 pr-4 py-3 rounded-lg bg-gray-50 border border-gray-200"
+                  formControlName="zipCode"
+                  placeholder="ქალაქის ZIP კოდი"
+                />
+                @if (showError("zipCode")) {
+                  <span class="text-red-500 text-sm mt-1 block">
+                    {{ getErrorMessage("zipCode") }}
+                  </span>
+                }
+              </div>
+            </div>
+
+            <div class="w-full">
+              <input
+                class="w-full pl-4 pr-4 py-3 rounded-lg bg-gray-50 border border-gray-200"
+                formControlName="address"
+                placeholder="ქუჩის მისამართი"
+              />
+              @if (showError("address")) {
+                <span class="text-red-500 text-sm mt-1 block">
+                  {{ getErrorMessage("address") }}
+                </span>
+              }
+            </div>
+
+            <div class="w-full">
+              <textarea
+                formControlName="comment"
+                class="w-full h-[120px] px-4 py-3 rounded-lg bg-gray-50 border border-gray-200"
+                placeholder="დაუტოვე კომენტარი კურიერს:"
+              ></textarea>
+            </div>
+
+            <div class="max-w-max">
+              <button
+                type="button"
+                class="inline-block w-[374px] md:w-[217px] h-[54px] bg-[#4461F2] text-white rounded-lg font-medium text-lg cursor-pointer"
+                (click)="nextStep()"
+              >
+                შემდეგი
+              </button>
+            </div>
+          </div>
+        }
+
+        <!-- გადახდა -->
+        @if (currentStep() === 3) {
+           <app-order-info [registerForm]="registerForm"></app-order-info>
+          <div class="space-y-6">
+            <div>
+              <label class="block mb-2 font-bold">აირჩიეთ ბარათი:</label>
+              <input
+                formControlName="cardInfo"
+                maxlength="12"
+                class="w-full pl-4 pr-4 py-3 rounded-lg bg-gray-50 border border-gray-200"
+                placeholder="XXX XXX XXX XXX"
+              />
+
+              @if (showError("cardInfo")) {
+                <span class="text-red-500 text-sm mt-1 block">
+                  {{ getErrorMessage("cardInfo") }}
+                </span>
+              }
+            </div>
+
+            <button
+              class="bg-[#9BA1AB] text-white rounded-[8px] pt-[14px] pr-[16px] pb-[14px] pl-[16px] w-[374px] md:w-[255px] cursor-pointer"
+            >
+              ახალი ბარათის დამატება
+            </button>
+          </div>
+        }
+      </form>
+    </div>
+  </div>
+</div>
