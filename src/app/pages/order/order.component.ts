@@ -17,6 +17,7 @@ export class OrderComponent {
   email = signal('sadgisileather@gmail.com');
   currentStep = signal(1);
   orderForm: FormGroup;
+
   cities = signal([
     { value: 'tbilisi', label: 'თბილისი' },
     { value: 'batumi', label: 'ბათუმი' },

@@ -1,7 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { QuestionsComponent } from '../../shared/questions/questions.component';
-
+import { BasketProduct, BasketService } from '../../services/basket.service';
+import { ActivatedRoute } from '@angular/router';
+import { ProductListService } from '../../services/product-services/productsList.service';
+import { Product } from '../../interfaces/product.interface';
+import { FavoritesService } from '../../services/product-services/favoritesList.service';
 @Component({
   selector: 'app-product-details',
   standalone: true,
@@ -9,23 +13,45 @@ import { QuestionsComponent } from '../../shared/questions/questions.component';
   templateUrl: './product-details.component.html',
   styleUrl: './product-details.component.css',
 })
-export class ProductDetailsComponent {
-  // Properties for product details
-  product = {
-    id: 1,
-    name: 'მამაკაცის ტყავის საფულე',
-    description: 'იტალიური ტყავით შექმნილი საფულე',
-    price: 75,
-    rating: 4.9,
-    description_long: 'იტვის 8 მდე ბარტს',
-    additional_info: 'განკუთვნილია კაკიერებისთვის',
-    quantity_in_stock: 5,
-    images: [
-      'https://placehold.co/600x400',
-      'https://placehold.co/600x400',
-      'https://placehold.co/600x400',
-      'https://placehold.co/600x400',
-    ],
-    colors: ['#C4977C', '#8B4513', '#000000'],
-  };
+export class ProductDetailsComponent implements OnInit {
+  product: Product | undefined;
+  selectedColorIndex: number | null = null;
+
+  readonly #activatedRoute = inject(ActivatedRoute);
+  readonly #productService = inject(ProductListService);
+  readonly #basketService = inject(BasketService);
+  readonly #favoritesService = inject(FavoritesService);
+
+  ngOnInit(): void {
+    const idParam = this.#activatedRoute.snapshot.paramMap.get('id');
+    const productId = idParam ? +idParam : null;
+
+    if (productId !== null) {
+      this.#productService.getProductById(productId).subscribe((product) => {
+        this.product = product;
+      });
+    }
+  }
+
+  addIntoBasket() {
+    if (!this.product) return;
+
+    const basketItem: BasketProduct = {
+      ...this.product,
+      quantity: 1,
+    };
+
+    this.#basketService.addToBasket(basketItem);
+  }
+
+  toggleFavorite() {
+    if (!this.product) return;
+    this.#favoritesService.toggleFavorite(this.product.id);
+  }
+
+  isFavorite(): boolean {
+    return this.product
+      ? this.#favoritesService.isFavorite(this.product.id)
+      : false;
+  }
 }

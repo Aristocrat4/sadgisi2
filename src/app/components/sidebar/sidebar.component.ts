@@ -21,20 +21,20 @@ export class SidebarComponent implements OnInit, OnDestroy {
   constructor(
     private sidebarService: SidebarService,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
   ) {}
 
   ngOnInit() {
     this.sidebarSubscription = this.sidebarService.sidebarOpen$.subscribe(
       (isOpen) => {
         this.isOpen = isOpen;
-      }
+      },
     );
 
     this.authSubscription = this.authService.isAuthenticated$.subscribe(
       (isAuthenticated) => {
         this.isLoggedIn = isAuthenticated;
-      }
+      },
     );
   }
 

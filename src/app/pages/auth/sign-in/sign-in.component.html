@@ -50,10 +50,10 @@
                 placeholder="შეიყვანეთ იმეილი"
               />
             </div>
-            @if (showError('email')) {
-            <span class="text-red-500 text-sm mt-1 block">{{
-              getErrorMessage("email")
-            }}</span>
+            @if (showError("email")) {
+              <span class="text-red-500 text-sm mt-1 block">{{
+                getErrorMessage("email")
+              }}</span>
             }
           </div>
 
@@ -70,10 +70,10 @@
                 placeholder="შეიყვანეთ პაროლი"
               />
             </div>
-            @if (showError('password')) {
-            <span class="text-red-500 text-sm mt-1 block">{{
-              getErrorMessage("password")
-            }}</span>
+            @if (showError("password")) {
+              <span class="text-red-500 text-sm mt-1 block">{{
+                getErrorMessage("password")
+              }}</span>
             }
           </div>
 

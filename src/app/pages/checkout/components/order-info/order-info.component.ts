@@ -6,8 +6,8 @@ import { FormGroup } from '@angular/forms';
   imports: [],
   standalone: true,
   templateUrl: './order-info.component.html',
-  styleUrl: './order-info.component.css'
+  styleUrl: './order-info.component.css',
 })
 export class OrderInfoComponent {
-@Input() registerForm!: FormGroup; 
+  @Input() registerForm!: FormGroup;
 }

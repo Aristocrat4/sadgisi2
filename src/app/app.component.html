@@ -1,11 +1,13 @@
-<div class="flex flex-col min-h-screen  pl-[90px] pr-[90px]">
-  <div class=" mx-auto max-w-[1260px]">
-    <app-header class="w-full"></app-header>
-    <main class="grow w-full">
-      <router-outlet></router-outlet>
-    </main>
-    <app-footer
-      class="h-[200px] max-[1260px]:h-[351px] bg-[#F5F5F5] w-full"
-    ></app-footer>
-  </div>
+<div class="flex flex-col min-h-screen max-w-[100vw] overflow-hidden">
+  <app-header class="w-full"></app-header>
+  <main class="grow w-full lg:px-[90px]">
+    @if (!isOpen) {
+      <router-outlet [hidden]="isOpen"></router-outlet>
+    } @else {
+      <app-sidebar></app-sidebar>
+    }
+  </main>
+  <app-footer
+    class="h-[200px] max-[1260px]:h-[351px] bg-[#F5F5F5] w-full"
+  ></app-footer>
 </div>

@@ -7,6 +7,8 @@ import {
   Validators,
 } from '@angular/forms';
 import { OrderInfoComponent } from '../order-info/order-info.component';
+import { emailValidator } from '../../validators/email-validator';
+import { nameAndSurnameValidator } from '../../validators/nameAndUsernameValidator';
 
 @Component({
   selector: 'app-checkout-form',
@@ -18,7 +20,7 @@ import { OrderInfoComponent } from '../order-info/order-info.component';
 export class CheckoutFormComponent {
   currentStep = signal(1);
   registerForm: FormGroup;
- cities = signal([
+  cities = signal([
     { value: 'tbilisi', label: 'თბილისი' },
     { value: 'batumi', label: 'ბათუმი' },
     { value: 'kutaisi', label: 'ქუთაისი' },
@@ -31,16 +33,19 @@ export class CheckoutFormComponent {
     }
   }
 
-   constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder) {
     this.registerForm = this.fb.group({
-      nameAndSurname: ['', Validators.required],
-      email: ['', [Validators.required, Validators.email]],
+      nameAndSurname: ['', [Validators.required, nameAndSurnameValidator]],
+      email: ['', [Validators.required, emailValidator()]],
       phoneNumber: ['', Validators.required],
       city: ['', Validators.required],
       zipCode: [''],
       address: ['', Validators.required],
       comment: [''],
-      cardInfo: ['', [Validators.required, Validators.pattern(/^[0-9]{1,12}$/)]],
+      cardInfo: [
+        '',
+        [Validators.required, Validators.pattern(/^[0-9]{1,12}$/)],
+      ],
     });
   }
 
@@ -84,6 +89,7 @@ export class CheckoutFormComponent {
       if (control.errors['required']) return 'ეს ველი სავალდებულოა';
       if (control.errors['email']) return 'არასწორი იმეილის ფორმატი';
       if (control.errors['pattern']) return 'შეიყვანეთ სწორი მობილურის ნომერი';
+      if (control?.hasError('nameSurname')) return 'მიუთითეთ სახელი და გვარი';
     }
     return '';
   }

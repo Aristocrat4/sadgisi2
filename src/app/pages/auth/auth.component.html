@@ -3,142 +3,44 @@
     <!-- Left Side: Auth Form -->
     <div class="w-full">
       @if (isLogin()) {
-      <!-- Login Form -->
-      <div class="mb-8">
-        <h1 class="text-3xl font-medium mb-4">ავტორიზაცია</h1>
-        <p class="text-gray-600">
-          შეიყვანეთ თქვენი ანგარიშის ინფორმაცია ავტორიზაციისთვის
-        </p>
-      </div>
-
-      <div class="space-y-6">
-        <!-- Social Login Buttons -->
-        <div class="grid grid-cols-2 gap-4">
-          <button
-            class="flex items-center justify-center gap-2 border border-gray-300 rounded-lg py-3 px-4"
-          >
-            <i class="fa-brands fa-google"></i>
-            <span>GOOGLE-ით ავტორიზაცია</span>
-          </button>
-          <button
-            class="flex items-center justify-center gap-2 border border-gray-300 rounded-lg py-3 px-4"
-          >
-            <i class="fa-brands fa-facebook-f"></i>
-            <span>FACEBOOK-ით ავტორიზაცია</span>
-          </button>
+        <!-- Login Form -->
+        <div class="mb-8">
+          <h1 class="text-3xl font-medium mb-4">ავტორიზაცია</h1>
+          <p class="text-gray-600">
+            შეიყვანეთ თქვენი ანგარიშის ინფორმაცია ავტორიზაციისთვის
+          </p>
         </div>
 
-        <div class="flex items-center">
-          <div class="flex-1 h-px bg-gray-300"></div>
-          <span class="px-4 text-gray-500">ან</span>
-          <div class="flex-1 h-px bg-gray-300"></div>
-        </div>
-
-        <form
-          [formGroup]="loginForm"
-          (ngSubmit)="onLoginSubmit()"
-          class="space-y-6 w-full"
-        >
-          <div>
-            <label class="block mb-2 font-bold">ი-მეილი:</label>
-            <div class="relative">
-              <i
-                class="fa-regular fa-envelope absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"
-              ></i>
-              <input
-                type="email"
-                formControlName="email"
-                class="w-full pl-12 pr-4 py-3 rounded-lg bg-gray-50 border border-gray-200"
-                placeholder="შეიყვანეთ იმეილი"
-              />
-            </div>
-            @if (showError(loginForm, 'email')) {
-            <span class="text-red-500 text-sm mt-1 block">{{
-              getErrorMessage(loginForm, "email")
-            }}</span>
-            }
-          </div>
-
-          <div>
-            <label class="block mb-2 font-bold">პაროლი:</label>
-            <div class="relative">
-              <i
-                class="fa-solid fa-lock absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"
-              ></i>
-              <input
-                type="password"
-                formControlName="password"
-                class="w-full pl-12 pr-4 py-3 rounded-lg bg-gray-50 border border-gray-200"
-                placeholder="შეიყვანეთ პაროლი"
-              />
-            </div>
-            @if (showError(loginForm, 'password')) {
-            <span class="text-red-500 text-sm mt-1 block">{{
-              getErrorMessage(loginForm, "password")
-            }}</span>
-            }
-          </div>
-
-          <div class="text-right">
-            <a href="#" class="text-[#4461F2]">დაგავიწყდათ პაროლი?</a>
-          </div>
-
-          <button
-            type="submit"
-            class="w-full bg-[#4461F2] text-white py-4 rounded-lg font-medium text-lg"
-          >
-            ავტორიზაცია
-          </button>
-
-          <div class="text-center">
-            <span class="text-gray-600">არ გაქვთ ანგარიში? </span>
+        <div class="space-y-6">
+          <!-- Social Login Buttons -->
+          <div class="grid grid-cols-2 gap-4">
             <button
-              type="button"
-              (click)="toggleAuthMode()"
-              class="text-[#4461F2]"
+              class="flex items-center justify-center gap-2 border border-gray-300 rounded-lg py-3 px-4"
             >
-              რეგისტრაცია
+              <i class="fa-brands fa-google"></i>
+              <span>GOOGLE-ით ავტორიზაცია</span>
+            </button>
+            <button
+              class="flex items-center justify-center gap-2 border border-gray-300 rounded-lg py-3 px-4"
+            >
+              <i class="fa-brands fa-facebook-f"></i>
+              <span>FACEBOOK-ით ავტორიზაცია</span>
             </button>
           </div>
-        </form>
-      </div>
-      } @else {
-      <!-- Registration Form -->
-      <div class="mb-8">
-        <h1 class="text-3xl font-medium mb-4">რეგისტრაცია</h1>
-        <p class="text-gray-600">შექმენით ანგარიში ჩვენს პლატფორმაზე</p>
-      </div>
 
-      <div class="space-y-6">
-        <form
-          [formGroup]="registerForm"
-          (ngSubmit)="onRegisterSubmit()"
-          class="space-y-6 w-full"
-        >
-          <!-- 2-Column Grid Layout -->
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6 w-full">
-            <div>
-              <label class="block mb-2 font-bold">სრული სახელი:</label>
-              <div class="relative">
-                <i
-                  class="fa-regular fa-user absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"
-                ></i>
-                <input
-                  type="text"
-                  formControlName="fullName"
-                  class="w-full pl-12 pr-4 py-3 rounded-lg bg-gray-50 border border-gray-200 max-w-none"
-                  placeholder="სახელი და გვარი"
-                />
-              </div>
-              @if (showError(registerForm, 'fullName')) {
-              <span class="text-red-500 text-sm mt-1 block">{{
-                getErrorMessage(registerForm, "fullName")
-              }}</span>
-              }
-            </div>
+          <div class="flex items-center">
+            <div class="flex-1 h-px bg-gray-300"></div>
+            <span class="px-4 text-gray-500">ან</span>
+            <div class="flex-1 h-px bg-gray-300"></div>
+          </div>
 
+          <form
+            [formGroup]="loginForm"
+            (ngSubmit)="onLoginSubmit()"
+            class="space-y-6 w-full"
+          >
             <div>
-              <label class="block mb-2 font-bold">იმეილი:</label>
+              <label class="block mb-2 font-bold">ი-მეილი:</label>
               <div class="relative">
                 <i
                   class="fa-regular fa-envelope absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"
@@ -146,52 +48,14 @@
                 <input
                   type="email"
                   formControlName="email"
-                  class="w-full pl-12 pr-4 py-3 rounded-lg bg-gray-50 border border-gray-200 max-w-none"
-                  placeholder="იმეილი"
+                  class="w-full pl-12 pr-4 py-3 rounded-lg bg-gray-50 border border-gray-200"
+                  placeholder="შეიყვანეთ იმეილი"
                 />
               </div>
-              @if (showError(registerForm, 'email')) {
-              <span class="text-red-500 text-sm mt-1 block">{{
-                getErrorMessage(registerForm, "email")
-              }}</span>
-              }
-            </div>
-
-            <div>
-              <label class="block mb-2 font-bold">ქალაქი:</label>
-              <select
-                formControlName="city"
-                class="w-full px-4 py-3 rounded-lg bg-gray-50 border border-gray-200 appearance-none"
-              >
-                <option value="" disabled selected>ქალაქი</option>
-                <option value="tbilisi">თბილისი</option>
-                <option value="batumi">ბათუმი</option>
-                <option value="kutaisi">ქუთაისი</option>
-              </select>
-              @if (showError(registerForm, 'city')) {
-              <span class="text-red-500 text-sm mt-1 block">{{
-                getErrorMessage(registerForm, "city")
-              }}</span>
-              }
-            </div>
-
-            <div>
-              <label class="block mb-2 font-bold">საკონტაქტო ინფორმაცია:</label>
-              <div class="relative">
-                <i
-                  class="fa-solid fa-phone absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"
-                ></i>
-                <input
-                  type="text"
-                  formControlName="contactInfo"
-                  class="w-full pl-12 pr-4 py-3 rounded-lg bg-gray-50 border border-gray-200 max-w-none"
-                  placeholder="მობილურის ნომერი"
-                />
-              </div>
-              @if (showError(registerForm, 'contactInfo')) {
-              <span class="text-red-500 text-sm mt-1 block">{{
-                getErrorMessage(registerForm, "contactInfo")
-              }}</span>
+              @if (showError(loginForm, "email")) {
+                <span class="text-red-500 text-sm mt-1 block">{{
+                  getErrorMessage(loginForm, "email")
+                }}</span>
               }
             </div>
 
@@ -204,57 +68,195 @@
                 <input
                   type="password"
                   formControlName="password"
-                  class="w-full pl-12 pr-4 py-3 rounded-lg bg-gray-50 border border-gray-200 max-w-none"
+                  class="w-full pl-12 pr-4 py-3 rounded-lg bg-gray-50 border border-gray-200"
                   placeholder="შეიყვანეთ პაროლი"
                 />
               </div>
-              @if (showError(registerForm, 'password')) {
-              <span class="text-red-500 text-sm mt-1 block">{{
-                getErrorMessage(registerForm, "password")
-              }}</span>
+              @if (showError(loginForm, "password")) {
+                <span class="text-red-500 text-sm mt-1 block">{{
+                  getErrorMessage(loginForm, "password")
+                }}</span>
               }
             </div>
 
-            <div>
-              <label class="block mb-2 font-bold">გაიმეორეთ პაროლი:</label>
-              <div class="relative">
-                <i
-                  class="fa-solid fa-lock absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"
-                ></i>
-                <input
-                  type="password"
-                  formControlName="confirmPassword"
-                  class="w-full pl-12 pr-4 py-3 rounded-lg bg-gray-50 border border-gray-200 max-w-none"
-                  placeholder="გაიმეორეთ პაროლი"
-                />
-              </div>
-              @if (showError(registerForm, 'confirmPassword')) {
-              <span class="text-red-500 text-sm mt-1 block">{{
-                getErrorMessage(registerForm, "confirmPassword")
-              }}</span>
-              }
+            <div class="text-right">
+              <a href="#" class="text-[#4461F2]">დაგავიწყდათ პაროლი?</a>
             </div>
-          </div>
 
-          <button
-            type="submit"
-            class="w-full bg-[#4461F2] text-white py-4 rounded-lg font-medium text-lg"
-          >
-            რეგისტრაცია
-          </button>
-
-          <div class="text-center">
-            <span class="text-gray-600">უკვე გაქვთ ანგარიში? </span>
             <button
-              type="button"
-              (click)="toggleAuthMode()"
-              class="text-[#4461F2]"
+              type="submit"
+              class="w-full bg-[#4461F2] text-white py-4 rounded-lg font-medium text-lg"
             >
               ავტორიზაცია
             </button>
-          </div>
-        </form>
-      </div>
+
+            <div class="text-center">
+              <span class="text-gray-600">არ გაქვთ ანგარიში? </span>
+              <button
+                type="button"
+                (click)="toggleAuthMode()"
+                class="text-[#4461F2]"
+              >
+                რეგისტრაცია
+              </button>
+            </div>
+          </form>
+        </div>
+      } @else {
+        <!-- Registration Form -->
+        <div class="mb-8">
+          <h1 class="text-3xl font-medium mb-4">რეგისტრაცია</h1>
+          <p class="text-gray-600">შექმენით ანგარიში ჩვენს პლატფორმაზე</p>
+        </div>
+
+        <div class="space-y-6">
+          <form
+            [formGroup]="registerForm"
+            (ngSubmit)="onRegisterSubmit()"
+            class="space-y-6 w-full"
+          >
+            <!-- 2-Column Grid Layout -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6 w-full">
+              <div>
+                <label class="block mb-2 font-bold">სრული სახელი:</label>
+                <div class="relative">
+                  <i
+                    class="fa-regular fa-user absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"
+                  ></i>
+                  <input
+                    type="text"
+                    formControlName="fullName"
+                    class="w-full pl-12 pr-4 py-3 rounded-lg bg-gray-50 border border-gray-200 max-w-none"
+                    placeholder="სახელი და გვარი"
+                  />
+                </div>
+                @if (showError(registerForm, "fullName")) {
+                  <span class="text-red-500 text-sm mt-1 block">{{
+                    getErrorMessage(registerForm, "fullName")
+                  }}</span>
+                }
+              </div>
+
+              <div>
+                <label class="block mb-2 font-bold">იმეილი:</label>
+                <div class="relative">
+                  <i
+                    class="fa-regular fa-envelope absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"
+                  ></i>
+                  <input
+                    type="email"
+                    formControlName="email"
+                    class="w-full pl-12 pr-4 py-3 rounded-lg bg-gray-50 border border-gray-200 max-w-none"
+                    placeholder="იმეილი"
+                  />
+                </div>
+                @if (showError(registerForm, "email")) {
+                  <span class="text-red-500 text-sm mt-1 block">{{
+                    getErrorMessage(registerForm, "email")
+                  }}</span>
+                }
+              </div>
+
+              <div>
+                <label class="block mb-2 font-bold">ქალაქი:</label>
+                <select
+                  formControlName="city"
+                  class="w-full px-4 py-3 rounded-lg bg-gray-50 border border-gray-200 appearance-none"
+                >
+                  <option value="" disabled selected>ქალაქი</option>
+                  <option value="tbilisi">თბილისი</option>
+                  <option value="batumi">ბათუმი</option>
+                  <option value="kutaisi">ქუთაისი</option>
+                </select>
+                @if (showError(registerForm, "city")) {
+                  <span class="text-red-500 text-sm mt-1 block">{{
+                    getErrorMessage(registerForm, "city")
+                  }}</span>
+                }
+              </div>
+
+              <div>
+                <label class="block mb-2 font-bold"
+                  >საკონტაქტო ინფორმაცია:</label
+                >
+                <div class="relative">
+                  <i
+                    class="fa-solid fa-phone absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"
+                  ></i>
+                  <input
+                    type="text"
+                    formControlName="contactInfo"
+                    class="w-full pl-12 pr-4 py-3 rounded-lg bg-gray-50 border border-gray-200 max-w-none"
+                    placeholder="მობილურის ნომერი"
+                  />
+                </div>
+                @if (showError(registerForm, "contactInfo")) {
+                  <span class="text-red-500 text-sm mt-1 block">{{
+                    getErrorMessage(registerForm, "contactInfo")
+                  }}</span>
+                }
+              </div>
+
+              <div>
+                <label class="block mb-2 font-bold">პაროლი:</label>
+                <div class="relative">
+                  <i
+                    class="fa-solid fa-lock absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"
+                  ></i>
+                  <input
+                    type="password"
+                    formControlName="password"
+                    class="w-full pl-12 pr-4 py-3 rounded-lg bg-gray-50 border border-gray-200 max-w-none"
+                    placeholder="შეიყვანეთ პაროლი"
+                  />
+                </div>
+                @if (showError(registerForm, "password")) {
+                  <span class="text-red-500 text-sm mt-1 block">{{
+                    getErrorMessage(registerForm, "password")
+                  }}</span>
+                }
+              </div>
+
+              <div>
+                <label class="block mb-2 font-bold">გაიმეორეთ პაროლი:</label>
+                <div class="relative">
+                  <i
+                    class="fa-solid fa-lock absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"
+                  ></i>
+                  <input
+                    type="password"
+                    formControlName="confirmPassword"
+                    class="w-full pl-12 pr-4 py-3 rounded-lg bg-gray-50 border border-gray-200 max-w-none"
+                    placeholder="გაიმეორეთ პაროლი"
+                  />
+                </div>
+                @if (showError(registerForm, "confirmPassword")) {
+                  <span class="text-red-500 text-sm mt-1 block">{{
+                    getErrorMessage(registerForm, "confirmPassword")
+                  }}</span>
+                }
+              </div>
+            </div>
+
+            <button
+              type="submit"
+              class="w-full bg-[#4461F2] text-white py-4 rounded-lg font-medium text-lg"
+            >
+              რეგისტრაცია
+            </button>
+
+            <div class="text-center">
+              <span class="text-gray-600">უკვე გაქვთ ანგარიში? </span>
+              <button
+                type="button"
+                (click)="toggleAuthMode()"
+                class="text-[#4461F2]"
+              >
+                ავტორიზაცია
+              </button>
+            </div>
+          </form>
+        </div>
       }
     </div>
 

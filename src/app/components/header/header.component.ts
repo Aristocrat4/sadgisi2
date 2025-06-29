@@ -10,7 +10,13 @@ import { SidebarComponent } from '../sidebar/sidebar.component';
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [RouterLink, RouterLinkActive, CommonModule, RouterModule, SidebarComponent],
+  imports: [
+    RouterLink,
+    RouterLinkActive,
+    CommonModule,
+    RouterModule,
+    SidebarComponent,
+  ],
   templateUrl: './header.component.html',
   styleUrl: './header.component.css',
 })
@@ -21,16 +27,16 @@ export class HeaderComponent implements OnInit {
   constructor(
     private authService: AuthService,
     private profileService: ProfileService,
-    private sidebarService: SidebarService
+    private sidebarService: SidebarService,
   ) {}
 
   ngOnInit() {
     this.authService.isAuthenticated$.subscribe((isAuthenticated) => {
       this.isLoggedIn = isAuthenticated;
     });
-      this.sidebarService.sidebarOpen$.subscribe(open => {
-    this.isSidebarOpen = open;
-  });
+    this.sidebarService.sidebarOpen$.subscribe((open) => {
+      this.isSidebarOpen = open;
+    });
     // Check if user is already authenticated
     this.authService.checkAuthStatus();
   }

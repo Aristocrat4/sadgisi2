@@ -9,6 +9,9 @@ import { RegisterComponent } from './pages/auth/register/register.component';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { ProfileInfoComponent } from './pages/profile/profile-info/profile-info.component';
 import { CheckoutComponent } from './pages/checkout/checkout.component';
+import { ProfileNotificationsComponent } from './pages/profile/profile-notifications/profile-notifications.component';
+import { OrdersHistoryComponent } from './pages/profile/orders-history/orders-history.component';
+import { FavoritesComponent } from './pages/profile/favorites/favorites.component';
 
 export const routes: Routes = [
   {
@@ -50,7 +53,9 @@ export const routes: Routes = [
     children: [
       { path: '', redirectTo: 'info', pathMatch: 'full' },
       { path: 'info', component: ProfileInfoComponent },
-      // Other profile routes will be added later
+      { path: 'orders', component: OrdersHistoryComponent },
+      { path: 'favorites', component: FavoritesComponent },
+      { path: 'notifications', component: ProfileNotificationsComponent },
     ],
   },
 ];

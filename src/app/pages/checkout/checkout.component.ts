@@ -7,7 +7,7 @@ import { CheckoutFormComponent } from './components/checkout-form/checkout-form.
   imports: [BasketTotalComponent, CheckoutFormComponent],
   standalone: true,
   templateUrl: './checkout.component.html',
-  styleUrl: './checkout.component.css'
+  styleUrl: './checkout.component.css',
 })
 export class CheckoutComponent {
   @ViewChild('formRef') formComponent!: CheckoutFormComponent;
@@ -16,7 +16,7 @@ export class CheckoutComponent {
     this.formComponent.onSubmit();
   }
 
-    isStepThree(): boolean {
+  isStepThree(): boolean {
     return this.formComponent?.currentStep?.() === 3;
   }
 }

@@ -1,6 +1,5 @@
 <div class="flex flex-col flex-start">
-  
-  <div class="flex items-center space-x-2 mb-8 justify-start">
+  <div class="flex flex-wrap items-center space-x-2 mb-8 justify-start">
     @for (stepName of steps; let idx = $index; track idx) {
       <button
         type="button"
@@ -17,52 +16,67 @@
     }
   </div>
 
-  <div class="flex gap-8">
+  <div class="flex gap-8 max-w-[740px]">
     <div class="w-full">
       <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
         <!-- საკონტაქტო ინფრომაცია -->
         @if (currentStep() === 1) {
-          <div class="flex flex-wrap gap-[15px]">
+          <div class="flex flex-wrap gap-6">
             <div
               class="w-full max-w-[374px] md:max-w-[740px] flex-shrink flex-grow"
             >
               <div class="relative">
+                <i
+                  class="fas fa-user absolute left-4 top-1/2 -translate-y-1/2 text-[#969EB7] text-[24px]"
+                >
+                </i>
+
                 <input
-                  class="w-full pl-4 pr-4 py-3 rounded-lg bg-gray-50 border border-gray-200"
+                  class="w-full pl-[50px] pr-4 py-3 rounded-lg bg-gray-50 border border-gray-200"
                   formControlName="nameAndSurname"
                   placeholder="სახელი და გვარი"
                 />
               </div>
-              <ng-container *ngIf="showError('nameAndSurname')">
+              @if (showError("nameAndSurname")) {
                 <span class="text-red-500 text-sm mt-1 block">
                   {{ getErrorMessage("nameAndSurname") }}
                 </span>
-              </ng-container>
+              }
             </div>
 
             <div class="w-full max-w-[374px] md:max-w-[358px] flex-shrink-0">
-              <div class="relative">
-                <input
-                  class="w-full pl-4 pr-4 py-3 rounded-lg bg-gray-50 border border-gray-200"
-                  formControlName="email"
-                  placeholder="თქვენი იმეილი"
-                />
+              <div class="w-full max-w-[374px] md:max-w-[358px] flex-shrink-0">
+                <div class="relative">
+                  <i
+                    class="fa-solid fa-envelope absolute left-4 top-1/2 -translate-y-1/2 text-[#969EB7] text-[24px]"
+                  ></i>
+
+                  <input
+                    class="w-full pl-[46px] pr-4 py-3 rounded-lg bg-gray-50 border border-gray-200"
+                    formControlName="email"
+                    placeholder="თქვენი იმეილი"
+                  />
+                </div>
               </div>
-              <ng-container *ngIf="showError('email')">
+              @if (showError("email")) {
                 <span class="text-red-500 text-sm mt-1 block">
                   {{ getErrorMessage("email") }}
                 </span>
-              </ng-container>
+              }
             </div>
 
             <div class="w-full max-w-[374px] md:max-w-[358px] flex-shrink-0">
               <div class="relative">
+                <i
+                  class="fa-solid fa-phone absolute left-4 top-1/2 -translate-y-1/2 text-[#969EB7] text-[24px]"
+                ></i>
                 <input
-                  class="w-full pl-4 pr-4 py-3 rounded-lg bg-gray-50 border border-gray-200"
+                  class="w-full pl-[50px] pr-4 py-3 rounded-lg bg-gray-50 border border-gray-200"
                   formControlName="phoneNumber"
                   placeholder="მობილურის ნომერი"
                 />
               </div>
+
               @if (showError("phoneNumber")) {
                 <span class="text-red-500 text-sm mt-1 block">
                   {{ getErrorMessage("phoneNumber") }}
@@ -73,8 +87,8 @@
             <div class="max-w-max">
               <button
                 type="button"
-                class="inline-block w-[374px] md:w-[217px] h-[54px] bg-[#4461F2] text-white rounded-lg font-medium text-lg cursor-pointer"
                 (click)="nextStep()"
+                class="inline-block w-[374px] md:w-[217px] h-[54px] bg-[#4461F2] hover:bg-[#1e3a8a] text-white rounded-lg font-medium text-lg cursor-pointer"
               >
                 შემდეგი
               </button>
@@ -87,20 +101,20 @@
           <div class="flex flex-wrap gap-6">
             <div class="flex w-full gap-6">
               <div class="w-1/2">
-              <select
-                formControlName="city"
-                class="w-full px-4 py-3 rounded-lg bg-gray-50 border border-gray-200 appearance-none"
-              >
-                <option value="" disabled selected>ქალაქი</option>
-                @for (city of cities(); track city.value) {
-                <option [value]="city.value">{{ city.label }}</option>
+                <select
+                  formControlName="city"
+                  class="w-full px-4 py-3 rounded-lg bg-gray-50 border border-gray-200 appearance-none"
+                >
+                  <option value="" disabled selected>ქალაქი</option>
+                  @for (city of cities(); track city.value) {
+                    <option [value]="city.value">{{ city.label }}</option>
+                  }
+                </select>
+                @if (showError("city")) {
+                  <span class="text-red-500 text-sm mt-1 block">{{
+                    getErrorMessage("city")
+                  }}</span>
                 }
-              </select>
-              @if (showError('city')) {
-              <span class="text-red-500 text-sm mt-1 block">{{
-                getErrorMessage("city")
-              }}</span>
-              }
               </div>
               <div class="w-1/2">
                 <input
@@ -118,11 +132,17 @@
             </div>
 
             <div class="w-full">
-              <input
-                class="w-full pl-4 pr-4 py-3 rounded-lg bg-gray-50 border border-gray-200"
-                formControlName="address"
-                placeholder="ქუჩის მისამართი"
-              />
+              <div class="relative">
+                <i
+                  class="fa-solid fa-location-dot absolute left-4 top-1/2 -translate-y-1/2 text-[#969EB7] text-[24px]"
+                ></i>
+                <input
+                  class="w-full pl-[46px] pr-4 py-3 rounded-lg bg-gray-50 border border-gray-200"
+                  formControlName="address"
+                  placeholder="ქუჩის მისამართი"
+                />
+              </div>
+
               @if (showError("address")) {
                 <span class="text-red-500 text-sm mt-1 block">
                   {{ getErrorMessage("address") }}
@@ -141,8 +161,8 @@
             <div class="max-w-max">
               <button
                 type="button"
-                class="inline-block w-[374px] md:w-[217px] h-[54px] bg-[#4461F2] text-white rounded-lg font-medium text-lg cursor-pointer"
                 (click)="nextStep()"
+                class="inline-block w-[374px] md:w-[217px] h-[54px] bg-[#4461F2] hover:bg-[#1e3a8a] text-white rounded-lg font-medium text-lg cursor-pointer"
               >
                 შემდეგი
               </button>
@@ -152,16 +172,25 @@
 
         <!-- გადახდა -->
         @if (currentStep() === 3) {
-           <app-order-info [registerForm]="registerForm"></app-order-info>
+          <app-order-info [registerForm]="registerForm"></app-order-info>
           <div class="space-y-6">
             <div>
-              <label class="block mb-2 font-bold">აირჩიეთ ბარათი:</label>
-              <input
-                formControlName="cardInfo"
-                maxlength="12"
-                class="w-full pl-4 pr-4 py-3 rounded-lg bg-gray-50 border border-gray-200"
-                placeholder="XXX XXX XXX XXX"
-              />
+              <label for="cardInfo" class="block mb-2 font-bold"
+                >აირჩიეთ ბარათი:</label
+              >
+              <div class="relative">
+                <i
+                  class="fa-solid fa-credit-card absolute left-4 top-1/2 -translate-y-1/2 text-[#969EB7]"
+                ></i>
+
+                <input
+                  id="cardInfo"
+                  formControlName="cardInfo"
+                  maxlength="12"
+                  class="w-full pl-[46px] pr-4 py-3 rounded-lg bg-gray-50 border border-gray-200"
+                  placeholder="XXX XXX XXX XXX"
+                />
+              </div>
 
               @if (showError("cardInfo")) {
                 <span class="text-red-500 text-sm mt-1 block">
@@ -171,7 +200,8 @@
             </div>
 
             <button
-              class="bg-[#9BA1AB] text-white rounded-[8px] pt-[14px] pr-[16px] pb-[14px] pl-[16px] w-[374px] md:w-[255px] cursor-pointer"
+              type="button"
+              class="bg-[#9BA1AB] hover:bg-[#8A909B] text-white rounded-[8px] pt-[14px] pr-[16px] pb-[14px] pl-[16px] w-[374px] md:w-[255px] cursor-pointer transition-colors duration-200"
             >
               ახალი ბარათის დამატება
             </button>
