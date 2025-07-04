@@ -1,11 +1,11 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 @Component({
   selector: 'app-profile-notifications',
   imports: [],
   standalone: true,
   templateUrl: './profile-notifications.component.html',
-  styleUrl: './profile-notifications.component.css',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProfileNotificationsComponent {
   notifications = [

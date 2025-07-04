@@ -1,4 +1,4 @@
-import { Component, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
   ReactiveFormsModule,
@@ -12,6 +12,7 @@ import {
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './order.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class OrderComponent {
   email = signal('sadgisileather@gmail.com');

@@ -1,4 +1,4 @@
-import { Component, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -6,6 +6,7 @@ import { CommonModule } from '@angular/common';
   standalone: true,
   imports: [CommonModule],
   templateUrl: './profile-info.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProfileInfoComponent {
   iliauni = signal('SABA.GOGOLADZE.2@ILIAUNI.EDU.GE');

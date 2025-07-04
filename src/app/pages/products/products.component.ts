@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { QuestionsComponent } from '../../shared/questions/questions.component';
@@ -14,7 +14,7 @@ import { ProductListingComponent } from './components/product-listing/product-li
     ProductListingComponent,
   ],
   templateUrl: './products.component.html',
-  styleUrl: './products.component.css',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProductsComponent {
   showFilters = false;

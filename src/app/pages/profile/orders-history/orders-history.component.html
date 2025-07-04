@@ -1,37 +1,111 @@
 <div class="flex flex-col gap-5">
   <!-- Header Section -->
-  <!-- Title -->
   <div class="flex items-center gap-[15px]">
     <i class="fa-solid fa-cart-shopping"></i>
     <span class="font-bold text-[18px] text-[#0D0E2D]">შეკვეთის ისტორია</span>
   </div>
 
-  <!-- Notifications List -->
-  <div
-    class="flex flex-col gap-[10px] max-h-[550px] overflow-y-auto rounded-2xl border border-gray-200 p-10"
-  >
-    <!-- @for (notification of notifications; track $index) {
+  <!-- Orders List -->
+  <div class="w-full max-w-3xl mx-auto mt-6">
+    @for (order of mockOrders; track order.orderId) {
       <div
-        class="flex gap-[10px] py-5 px-8 border rounded-[25px] border-[#CFD3DB] hover:border-[#5086EE] font-medium text-base cursor-pointer"
+        class="order-card flex flex-col gap-[10px] rounded-2xl border border-gray-200 p-5 transition-all duration-300 mb-4"
       >
-        <img
-          src="assets/sadgisilogo.png"
-          alt="sadgisi logo"
-          class="w-[40px] h-[40px] md:w-[63px] md:h-[63px]"
-        />
-        <p class="text-[14px] sm:text-base">{{ notification }}</p>
-      </div>
-    } -->
-  </div>
+        <!-- Order Summary Header (Always visible) -->
+        <div
+          class="flex flex-col lg:flex-row max-lg:gap-[10px] justify-between pb-4 border-b border-gray-200 cursor-pointer"
+          (click)="toggle(order.orderId)"
+        >
+          <div class="flex flex-row lg:flex-col gap-2">
+            <span class="font-bold text-[#0D0E2D] text-[14px] md:text-[18px]">
+              შეკვეთის ნომერი:
+            </span>
+            <span class="font-medium text-[#646978] text-[14px] md:text-[18px]">
+              #{{ order.number }}
+            </span>
+          </div>
+          <div class="flex flex-row lg:flex-col gap-2">
+            <span class="font-bold text-[#0D0E2D] text-[14px] md:text-[18px]">
+              თარიღი:
+            </span>
+            <span class="font-medium text-[#646978] text-[14px] md:text-[18px]">
+              {{ order.date }}
+            </span>
+          </div>
+          <div class="flex flex-row lg:flex-col gap-2">
+            <span class="font-bold text-[#0D0E2D] text-[14px] md:text-[18px]">
+              თანხა:
+            </span>
+            <span class="font-medium text-[#646978] text-[14px] md:text-[18px]">
+              {{ order.total }}₾
+            </span>
+          </div>
+        </div>
 
-  <!-- Delete Button (visible on md and down) -->
-  <div class="flex justify-end lg:hidden">
-    <button
-      class="flex gap-[5px] items-baseline text-[#DF3D50] cursor-pointer"
-      (click)="deleteNotifications()"
-    >
-      <i class="fa-solid fa-trash"></i>
-      <span class="text-sm font-medium">შეტყობინებების წაშლა</span>
-    </button>
+        <!-- Products List (Toggled visibility) -->
+        @if (openOrderId === order.orderId) {
+          <div
+            class="animate-dropdown overflow-hidden transition-all duration-300 ease-in-out"
+          >
+            @for (unit of order.products; track unit.id) {
+              <div
+                class="relative flex justify-between flex-wrap gap-[10px] pb-5 pt-[15px] px-[12px] md:pt-[21px] md:px-[20px] border rounded-[25px] border-[#CFD3DB] hover:border-[#5086EE] font-medium text-base cursor-pointer"
+              >
+                <div class="flex items-center justify-between">
+                  <img
+                    [src]="unit.images[0]"
+                    alt="sadgisi logo"
+                    class="w-[139px] h-[122px] md:w-[192px] md:h-[122px]"
+                  />
+                  <div class="flex flex-col pl-5 md:pl-4">
+                    <span
+                      class="font-medium text-[14px] text-[#0A0B26] md:text-[16px]"
+                      >სახელი: {{ unit.name }}
+                      <span
+                        class="inline-block rounded-full cursor-pointer w-[13px] h-[13px] lg:w-[18px] lg:h-[18px]"
+                      >
+                      </span>
+                    </span>
+                    <span
+                      class="font-medium text-[12px] text-[#0A0B26] md:text-[16px]"
+                      >ფერი:
+                      <span
+                        class="inline-block rounded-full cursor-pointer w-[13px] h-[13px] lg:w-[18px] lg:h-[18px]"
+                        [style.backgroundColor]="unit.colors[0]"
+                      >
+                      </span>
+                    </span>
+                    <span class="text-[14px] lg:text-[18px]"
+                      >რაოდენობა: {{ unit.quanitity }}
+                    </span>
+                    <button
+                      class="flex gap-[5px] items-baseline pt-5 text-[#DF3D50] cursor-pointer"
+                      (click)="deleteProduct()"
+                    >
+                      <i class="fa-solid fa-trash"></i>
+                      <span class="text-sm font-medium"
+                        >შეტყობინებების წაშლა</span
+                      >
+                    </button>
+                  </div>
+                  <div class="flex flex-col gap-3">
+                    <div
+                      class="font-medium text-[14px] text-[#0A0B26] md:font-bold md:text-[18px] md:text-[#0D0E2D] whitespace-pre max-lg:hidden"
+                    >
+                      შეკვეთის სტატუსი:
+                    </div>
+                    <button
+                      class="rounded-[20px] px-[10px] py-[8.5px] md:px-[26px] md:py-[11px] bg-[#F7B433] text-[#FFFFFF] cursor-pointer"
+                    >
+                      მუშავდება
+                    </button>
+                  </div>
+                </div>
+              </div>
+            }
+          </div>
+        }
+      </div>
+    }
   </div>
 </div>

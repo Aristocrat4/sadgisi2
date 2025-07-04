@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 
 @Component({
@@ -6,7 +6,7 @@ import { FormGroup } from '@angular/forms';
   imports: [],
   standalone: true,
   templateUrl: './order-info.component.html',
-  styleUrl: './order-info.component.css',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class OrderInfoComponent {
   @Input() registerForm!: FormGroup;

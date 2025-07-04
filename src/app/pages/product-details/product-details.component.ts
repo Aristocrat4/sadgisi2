@@ -1,4 +1,9 @@
-import { Component, inject, OnInit } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  inject,
+  OnInit,
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { QuestionsComponent } from '../../shared/questions/questions.component';
 import { BasketProduct, BasketService } from '../../services/basket.service';
@@ -11,7 +16,7 @@ import { FavoritesService } from '../../services/product-services/favoritesList.
   standalone: true,
   imports: [CommonModule, QuestionsComponent],
   templateUrl: './product-details.component.html',
-  styleUrl: './product-details.component.css',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProductDetailsComponent implements OnInit {
   product: Product | undefined;

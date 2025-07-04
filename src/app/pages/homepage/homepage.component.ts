@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { HeroImagesComponent } from '../../components/hero-images/hero-images.component';
 import { RatingsComponent } from '../../shared/ratings/ratings.component';
 import { QuestionsComponent } from '../../shared/questions/questions.component';
@@ -7,6 +7,6 @@ import { QuestionsComponent } from '../../shared/questions/questions.component';
   selector: 'app-homepage',
   imports: [HeroImagesComponent, RatingsComponent, QuestionsComponent],
   templateUrl: './homepage.component.html',
-  styleUrl: './homepage.component.css',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HomepageComponent {}

@@ -1,10 +1,11 @@
 <div class="flex flex-col flex-start">
+  <!-- Step Navigation -->
   <div class="flex flex-wrap items-center space-x-2 mb-8 justify-start">
     @for (stepName of steps; let idx = $index; track idx) {
       <button
         type="button"
         (click)="goToStep(idx + 1)"
-        class="text-sm md:text-base"
+        class="text-sm md:text-base cursor-pointer"
         [class.font-bold]="currentStep() >= idx + 1"
         [ngStyle]="{ color: currentStep() === idx + 1 ? '#0A0B26' : '' }"
       >
@@ -19,7 +20,7 @@
   <div class="flex gap-8 max-w-[740px]">
     <div class="w-full">
       <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
-        <!-- საკონტაქტო ინფრომაცია -->
+        <!-- Step 1: Contact Information -->
         @if (currentStep() === 1) {
           <div class="flex flex-wrap gap-6">
             <div
@@ -30,7 +31,6 @@
                   class="fas fa-user absolute left-4 top-1/2 -translate-y-1/2 text-[#969EB7] text-[24px]"
                 >
                 </i>
-
                 <input
                   class="w-full pl-[50px] pr-4 py-3 rounded-lg bg-gray-50 border border-gray-200"
                   formControlName="nameAndSurname"
@@ -45,18 +45,15 @@
             </div>
 
             <div class="w-full max-w-[374px] md:max-w-[358px] flex-shrink-0">
-              <div class="w-full max-w-[374px] md:max-w-[358px] flex-shrink-0">
-                <div class="relative">
-                  <i
-                    class="fa-solid fa-envelope absolute left-4 top-1/2 -translate-y-1/2 text-[#969EB7] text-[24px]"
-                  ></i>
-
-                  <input
-                    class="w-full pl-[46px] pr-4 py-3 rounded-lg bg-gray-50 border border-gray-200"
-                    formControlName="email"
-                    placeholder="თქვენი იმეილი"
-                  />
-                </div>
+              <div class="relative">
+                <i
+                  class="fa-solid fa-envelope absolute left-4 top-1/2 -translate-y-1/2 text-[#969EB7] text-[24px]"
+                ></i>
+                <input
+                  class="w-full pl-[46px] pr-4 py-3 rounded-lg bg-gray-50 border border-gray-200"
+                  formControlName="email"
+                  placeholder="თქვენი იმეილი"
+                />
               </div>
               @if (showError("email")) {
                 <span class="text-red-500 text-sm mt-1 block">
@@ -76,7 +73,6 @@
                   placeholder="მობილურის ნომერი"
                 />
               </div>
-
               @if (showError("phoneNumber")) {
                 <span class="text-red-500 text-sm mt-1 block">
                   {{ getErrorMessage("phoneNumber") }}
@@ -96,7 +92,7 @@
           </div>
         }
 
-        <!-- ლოკაცია -->
+        <!-- Step 2: Location -->
         @if (currentStep() === 2) {
           <div class="flex flex-wrap gap-6">
             <div class="flex w-full gap-6">
@@ -142,7 +138,6 @@
                   placeholder="ქუჩის მისამართი"
                 />
               </div>
-
               @if (showError("address")) {
                 <span class="text-red-500 text-sm mt-1 block">
                   {{ getErrorMessage("address") }}
@@ -170,7 +165,7 @@
           </div>
         }
 
-        <!-- გადახდა -->
+        <!-- Step 3: Payment -->
         @if (currentStep() === 3) {
           <app-order-info [registerForm]="registerForm"></app-order-info>
           <div class="space-y-6">
@@ -182,7 +177,6 @@
                 <i
                   class="fa-solid fa-credit-card absolute left-4 top-1/2 -translate-y-1/2 text-[#969EB7]"
                 ></i>
-
                 <input
                   id="cardInfo"
                   formControlName="cardInfo"
@@ -200,10 +194,11 @@
             </div>
 
             <button
-              type="button"
-              class="bg-[#9BA1AB] hover:bg-[#8A909B] text-white rounded-[8px] pt-[14px] pr-[16px] pb-[14px] pl-[16px] w-[374px] md:w-[255px] cursor-pointer transition-colors duration-200"
+              type="submit"
+              [disabled]="!registerForm.valid"
+              class="bg-[#4461F2] hover:bg-[#1e3a8a] text-white rounded-[8px] pt-[14px] pr-[16px] pb-[14px] pl-[16px] w-[374px] md:w-[255px] cursor-pointer transition-colors duration-200"
             >
-              ახალი ბარათის დამატება
+              შეკვეთის გაფორმება
             </button>
           </div>
         }

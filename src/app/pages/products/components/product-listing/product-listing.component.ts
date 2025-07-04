@@ -1,4 +1,9 @@
-import { Component, inject, OnInit } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  inject,
+  OnInit,
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ProductListService } from '../../../../services/product-services/productsList.service';
 import { Product } from '../../../../interfaces/product.interface';
@@ -11,7 +16,7 @@ import { FavoritesService } from '../../../../services/product-services/favorite
   standalone: true,
   imports: [CommonModule, RouterLink],
   templateUrl: './product-listing.component.html',
-  styleUrl: './product-listing.component.css',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProductListingComponent implements OnInit {
   products: Product[] = [];

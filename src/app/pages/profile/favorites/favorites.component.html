@@ -10,7 +10,7 @@
   <div
     class="flex flex-col gap-[10px] max-h-[550px] rounded-2xl border border-gray-200"
   >
-    <div
+    <!-- <div
       class="flex gap-y-[10x] md:flex-col lg:flex-row lg:gap-x-[164px] py-[15px] pl-5"
     >
       <div class="flex lg:flex-col gap-[10px]">
@@ -29,29 +29,32 @@
           26 თებ, 2024, 19:42
         </span>
       </div>
-    </div>
+    </div> -->
     @for (favorite of favoritesList; track $index) {
       <div
-        class="relative flex gap-[10px] pb-5 pt-[15px] pl-[12px] md:pt-[21px] md:pl-[20px] border rounded-[25px] border-[#CFD3DB] hover:border-[#5086EE] font-medium text-base cursor-pointer"
+        class="relative flex justify-between flex-wrap gap-[10px] pb-5 pt-[15px] px-[12px] md:pt-[21px] md:px-[20px] border rounded-[25px] border-[#CFD3DB] hover:border-[#5086EE] font-medium text-base cursor-pointer"
       >
         <!-- Heart icon absolute top-right -->
         <div
           class="absolute top-4 right-4 w-[26px] h-[26px] rounded-full bg-[#DF3D50] flex items-center justify-center"
+          (click)="removeFromFavorites(favorite.id)"
         >
           <i class="fa-regular fa-heart text-[16px] text-white"></i>
         </div>
 
-        <img
-          [src]="favorite.images[0]"
-          alt="sadgisi logo"
-          class="w-[139px] h-[122px] md:w-[192px] md:h-[122px]"
-        />
-        <div>
+        <div class="flex gap-5">
+          <img
+            [src]="favorite.images[0]"
+            alt="sadgisi logo"
+            class="w-[139px] h-[122px] md:w-[192px] md:h-[122px]"
+          />
           <div class="flex flex-col">
             <span
-              class="font-medium text-[#0A0B26] text-[14px] lg:text-[16px]"
-              >{{ favorite.name }}</span
+              class="font-medium text-[#0A0B26] text-[14px] lg:text-[16px] break-words max-w-[180px] leading-snug"
             >
+              {{ favorite.name }}
+            </span>
+
             <span
               class="flex items-center gap-[6px] pt-[15px] font-medium text-[#0A0B26] text-[14px] lg:text-[16px]"
               >ფერი:
@@ -70,8 +73,12 @@
             >
           </div>
         </div>
-        <button>
+        <button
+          class="flex items-center self-end w-[181px] h-[52px] py-[10px] px-[13px] rounded-[12px] bg-[#5086EE] text-[white] cursor-pointer"
+          (click)="addIntoBasket(favorite)"
+        >
           <span>დამატება</span>
+          <i class="fa-cart-shopping fa-solid text-center text-xl w-8"></i>
         </button>
       </div>
     }

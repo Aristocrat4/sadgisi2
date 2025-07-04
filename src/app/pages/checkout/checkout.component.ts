@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ViewChild } from '@angular/core';
 import { BasketTotalComponent } from './components/basket-total/basket-total.component';
 import { CheckoutFormComponent } from './components/checkout-form/checkout-form.component';
 
@@ -7,7 +7,7 @@ import { CheckoutFormComponent } from './components/checkout-form/checkout-form.
   imports: [BasketTotalComponent, CheckoutFormComponent],
   standalone: true,
   templateUrl: './checkout.component.html',
-  styleUrl: './checkout.component.css',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CheckoutComponent {
   @ViewChild('formRef') formComponent!: CheckoutFormComponent;

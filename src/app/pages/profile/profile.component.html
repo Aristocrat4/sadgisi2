@@ -1,18 +1,17 @@
+<!-- profile-layout.component.html -->
+
 <div class="max-w-[1260px] mx-auto px-4 md:px-6 py-8 overflow-x-hidden">
-  <!-- Desktop Layout -->
-  <div class="hidden md:grid md:grid-cols-[300px_1fr] md:gap-12">
-    <!-- Left Side: Navigation -->
+  <div class="grid md:grid-cols-[300px_1fr] md:gap-12">
+    <!-- Sidebar (show conditionally) -->
     <div
-      class="bg-white rounded-2xl border border-gray-200 py-[27px] px-[20px] h-fit"
+      class="bg-white rounded-2xl border border-gray-200 py-[27px] px-[20px] h-fit hidden md:block"
     >
       <nav>
         <ul class="space-y-[20px]">
           @for (link of navLinks; track link.path) {
             <li>
               <a
-                [routerLink]="
-                  link.path !== 'logout' ? ['/profile', link.path] : null
-                "
+                [routerLink]="['/profile', link.path]"
                 (click)="onNavLinkClick(link.path)"
                 routerLinkActive="text-black font-bold"
                 class="flex items-center gap-5 py-2 hover:text-[#4461F2] transition-colors cursor-pointer whitespace-nowrap text-lg text-gray-600"
@@ -25,16 +24,9 @@
         </ul>
       </nav>
     </div>
-    <!-- rounded-2xl border border-gray-200 p-10 -->
-    <!-- Right Side: Content -->
-    <div class="bg-white">
-      <router-outlet/>
-    </div>
-  </div>
 
-  <!-- Mobile Layout -->
-  <div class="md:hidden">
-    <div class="bg-white">
+    <!-- Content -->
+    <div class="bg-white w-full">
       <router-outlet></router-outlet>
     </div>
   </div>

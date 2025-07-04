@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
@@ -9,35 +9,33 @@ import {
 import { OrderInfoComponent } from '../order-info/order-info.component';
 import { emailValidator } from '../../validators/email-validator';
 import { nameAndSurnameValidator } from '../../validators/nameAndUsernameValidator';
+import { phoneNumberValidator } from '../../validators/phone-number-validator';
 
 @Component({
   selector: 'app-checkout-form',
   imports: [ReactiveFormsModule, CommonModule, OrderInfoComponent],
   standalone: true,
   templateUrl: './checkout-form.component.html',
-  styleUrl: './checkout-form.component.css',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CheckoutFormComponent {
-  currentStep = signal(1);
+  currentStep = signal<number>(1);
+
   registerForm: FormGroup;
-  cities = signal([
+
+  cities = signal<{ value: string; label: string }[]>([
     { value: 'tbilisi', label: 'თბილისი' },
     { value: 'batumi', label: 'ბათუმი' },
     { value: 'kutaisi', label: 'ქუთაისი' },
   ]);
-  steps = ['საკონტაქტო ინფრომაცია', 'ლოკაცია', 'გადახდა'];
 
-  goToStep(stepNumber: number): void {
-    if (stepNumber <= this.currentStep()) {
-      this.currentStep.set(stepNumber);
-    }
-  }
+  steps: string[] = ['საკონტაქტო ინფრომაცია', 'ლოკაცია', 'გადახდა'];
 
   constructor(private fb: FormBuilder) {
     this.registerForm = this.fb.group({
       nameAndSurname: ['', [Validators.required, nameAndSurnameValidator]],
       email: ['', [Validators.required, emailValidator()]],
-      phoneNumber: ['', Validators.required],
+      phoneNumber: ['', [Validators.required, phoneNumberValidator()]],
       city: ['', Validators.required],
       zipCode: [''],
       address: ['', Validators.required],
@@ -49,31 +47,38 @@ export class CheckoutFormComponent {
     });
   }
 
+  goToStep(stepNumber: number): void {
+    if (stepNumber <= this.currentStep()) {
+      this.currentStep.set(stepNumber);
+    }
+  }
+
   nextStep(): void {
     if (!this.isCurrentStepValid()) {
       this.markCurrentStepControlsTouched();
       return;
     }
-
     this.currentStep.update((current) => current + 1);
   }
 
   markCurrentStepControlsTouched(): void {
-    const controls =
+    const controlsToMark =
       {
         1: ['nameAndSurname', 'email', 'phoneNumber'],
         2: ['city', 'zipCode', 'address'],
       }[this.currentStep()] || [];
 
-    controls.forEach((name) => {
+    controlsToMark.forEach((name) => {
       const control = this.registerForm.get(name);
       control?.markAsTouched();
       control?.updateValueAndValidity();
     });
   }
 
-  prevStep() {
-    if (this.currentStep() > 1) this.currentStep.update((n) => n - 1);
+  prevStep(): void {
+    if (this.currentStep() > 1) {
+      this.currentStep.update((n) => n - 1);
+    }
   }
 
   showError(controlName: string): boolean {
@@ -89,7 +94,7 @@ export class CheckoutFormComponent {
       if (control.errors['required']) return 'ეს ველი სავალდებულოა';
       if (control.errors['email']) return 'არასწორი იმეილის ფორმატი';
       if (control.errors['pattern']) return 'შეიყვანეთ სწორი მობილურის ნომერი';
-      if (control?.hasError('nameSurname')) return 'მიუთითეთ სახელი და გვარი';
+      if (control.errors['nameSurname']) return 'მიუთითეთ სახელი და გვარი';
     }
     return '';
   }
@@ -105,23 +110,28 @@ export class CheckoutFormComponent {
       case 2:
         return (
           !!this.registerForm.get('city')?.valid &&
-          !!this.registerForm.get('zipCode')?.valid &&
           !!this.registerForm.get('address')?.valid
         );
+      case 3:
+        return !!this.registerForm.get('cardInfo')?.valid;
       default:
         return true;
     }
   }
 
-  onSubmit() {
+  onSubmit(): void {
     if (this.registerForm.valid) {
-      console.log('Submitted', this.registerForm.value);
+      console.log('Form Submitted!', this.registerForm.value);
     } else {
-      this.markTouched();
+      this.markAllControlsTouched();
+      console.log('Form is invalid. Please check the errors.');
     }
   }
 
-  private markTouched() {
-    Object.values(this.registerForm.controls).forEach((c) => c.markAsTouched());
+  private markAllControlsTouched(): void {
+    Object.values(this.registerForm.controls).forEach((control) => {
+      control.markAsTouched();
+      control.updateValueAndValidity();
+    });
   }
 }
