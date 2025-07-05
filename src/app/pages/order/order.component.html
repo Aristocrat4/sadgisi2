@@ -2,7 +2,7 @@
   <div class="md:grid md:grid-cols-2 md:gap-8">
     <!-- Left Side: Title and Contact Info -->
     <div>
-      <div class="mb-16">
+      <div class="mb-4">
         <h1 class="text-3xl font-medium mb-4">შეკვეთა</h1>
         <p class="text-gray-600">
           შეუკვეთეთ თქვენთვის სასურველი პროდუქცია, რომელიც მორგებული იქნება
@@ -11,7 +11,8 @@
       </div>
 
       <!-- Contact Info -->
-      <div class="bg-gray-50 rounded-2xl p-8 space-y-4">
+      <!-- Duplicate info ??  -->
+      <!-- <div class="bg-gray-50 rounded-2xl pl-[15px] py-5 space-y-4">
         <div class="flex items-center gap-2">
           <i class="fa-solid fa-location-dot text-xl"></i>
           <span>რუსთავი, მეგობრობის 4</span>
@@ -33,313 +34,323 @@
           </a>
         </div>
       </div>
-    </div>
+    </div> -->
 
-    <!-- Right Side: Order Form -->
-    <div>
-      <form [formGroup]="orderForm" (ngSubmit)="onSubmit()" class="space-y-6">
-        <!-- Mobile Steps -->
-        <div class="md:hidden bg-gray-50 rounded-2xl p-6">
-          @if (currentStep() === 1) {
-          <div class="space-y-6">
-            <div>
-              <label class="block mb-2 font-bold">სრული სახელი:</label>
-              <div class="relative">
-                <i
-                  class="fa-regular fa-user absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"
-                ></i>
-                <input
-                  type="text"
-                  formControlName="fullName"
-                  class="w-full pl-12 pr-4 py-3 rounded-lg bg-white border border-gray-200"
-                  placeholder="სახელი და გვარი"
-                />
-              </div>
-              @if (showError('fullName')) {
-              <span class="text-red-500 text-sm mt-1 block">{{
-                getErrorMessage("fullName")
-              }}</span>
-              }
-            </div>
+      <!-- Right Side: Order Form -->
+      <div>
+        <form [formGroup]="orderForm" (ngSubmit)="onSubmit()" class="space-y-6">
+          <!-- Mobile Steps -->
+          <div class="md:hidden bg-gray-50 rounded-2xl p-6">
+            @if (currentStep() === 1) {
+              <div class="space-y-6">
+                <div>
+                  <label class="block mb-2 font-bold">სრული სახელი:</label>
+                  <div class="relative">
+                    <i
+                      class="fa-regular fa-user absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"
+                    ></i>
+                    <input
+                      type="text"
+                      formControlName="fullName"
+                      class="w-full pl-12 pr-4 py-3 rounded-lg bg-white border border-gray-200"
+                      placeholder="სახელი და გვარი"
+                    />
+                  </div>
+                  @if (showError("fullName")) {
+                    <span class="text-red-500 text-sm mt-1 block">{{
+                      getErrorMessage("fullName")
+                    }}</span>
+                  }
+                </div>
 
-            <div>
-              <label class="block mb-2 font-bold">იმეილი:</label>
-              <div class="relative">
-                <i
-                  class="fa-regular fa-envelope absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"
-                ></i>
-                <input
-                  type="email"
-                  formControlName="email"
-                  class="w-full pl-12 pr-4 py-3 rounded-lg bg-white border border-gray-200"
-                  placeholder="იმეილი"
-                />
-              </div>
-              @if (showError('email')) {
-              <span class="text-red-500 text-sm mt-1 block">{{
-                getErrorMessage("email")
-              }}</span>
-              }
-            </div>
+                <div>
+                  <label class="block mb-2 font-bold">იმეილი:</label>
+                  <div class="relative">
+                    <i
+                      class="fa-regular fa-envelope absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"
+                    ></i>
+                    <input
+                      type="email"
+                      formControlName="email"
+                      class="w-full pl-12 pr-4 py-3 rounded-lg bg-white border border-gray-200"
+                      placeholder="იმეილი"
+                    />
+                  </div>
+                  @if (showError("email")) {
+                    <span class="text-red-500 text-sm mt-1 block">{{
+                      getErrorMessage("email")
+                    }}</span>
+                  }
+                </div>
 
-            <div>
-              <label class="block mb-2 font-bold">ქალაქი:</label>
-              <select
-                formControlName="city"
-                class="w-full px-4 py-3 rounded-lg bg-white border border-gray-200 appearance-none"
-              >
-                <option value="" disabled selected>ქალაქი</option>
-                @for (city of cities(); track city.value) {
-                <option [value]="city.value">{{ city.label }}</option>
-                }
-              </select>
-              @if (showError('city')) {
-              <span class="text-red-500 text-sm mt-1 block">{{
-                getErrorMessage("city")
-              }}</span>
-              }
-            </div>
+                <div>
+                  <label class="block mb-2 font-bold">ქალაქი:</label>
+                  <select
+                    formControlName="city"
+                    class="w-full px-4 py-3 rounded-lg bg-white border border-gray-200 appearance-none"
+                  >
+                    <option value="" disabled selected>ქალაქი</option>
+                    @for (city of cities(); track city.value) {
+                      <option [value]="city.value">{{ city.label }}</option>
+                    }
+                  </select>
+                  @if (showError("city")) {
+                    <span class="text-red-500 text-sm mt-1 block">{{
+                      getErrorMessage("city")
+                    }}</span>
+                  }
+                </div>
 
-            <div>
-              <label class="block mb-2 font-bold">ZIP კოდი:</label>
-              <input
-                type="text"
-                formControlName="zipCode"
-                class="w-full px-4 py-3 rounded-lg bg-white border border-gray-200"
-                placeholder="ქალაქის ZIP კოდი"
-              />
-              @if (showError('zipCode')) {
-              <span class="text-red-500 text-sm mt-1 block">{{
-                getErrorMessage("zipCode")
-              }}</span>
-              }
-            </div>
+                <div>
+                  <label class="block mb-2 font-bold">ZIP კოდი:</label>
+                  <input
+                    type="text"
+                    formControlName="zipCode"
+                    class="w-full px-4 py-3 rounded-lg bg-white border border-gray-200"
+                    placeholder="ქალაქის ZIP კოდი"
+                  />
+                  @if (showError("zipCode")) {
+                    <span class="text-red-500 text-sm mt-1 block">{{
+                      getErrorMessage("zipCode")
+                    }}</span>
+                  }
+                </div>
 
-            <button
-              type="button"
-              (click)="nextStep()"
-              class="w-full bg-[#4461F2] text-white py-4 rounded-lg font-medium text-lg"
-            >
-              შემდეგი
-            </button>
-          </div>
-          } @if (currentStep() === 2) {
-          <div class="space-y-6">
-            <div>
-              <label class="block mb-2 font-bold">პროდუქცია:</label>
-              <select
-                formControlName="product"
-                class="w-full px-4 py-3 rounded-lg bg-white border border-gray-200 appearance-none"
-              >
-                <option value="" disabled selected>
-                  პირველი შესაძებელი ნივთი
-                </option>
-                <!-- Add product options -->
-              </select>
-            </div>
-
-            <div>
-              <label class="block mb-2 font-bold">საკონტაქტო ინფორმაცია:</label>
-              <div class="relative">
-                <i
-                  class="fa-solid fa-phone absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"
-                ></i>
-                <input
-                  type="text"
-                  formControlName="contactInfo"
-                  class="w-full pl-12 pr-4 py-3 rounded-lg bg-white border border-gray-200"
-                  placeholder="მობილურის ნომერი"
-                />
-              </div>
-            </div>
-
-            <div>
-              <label class="block mb-2 font-bold">პროდუქციის აღწერა:</label>
-              <textarea
-                formControlName="description"
-                rows="4"
-                class="w-full px-4 py-3 rounded-lg bg-white border border-gray-200"
-                placeholder="დეტალური აღწერა თუ როგორი პროდუქტი მასურთ"
-              ></textarea>
-            </div>
-
-            <!-- File Upload -->
-            <div>
-              <label class="block mb-2 font-bold">ფოტო სურათის ატვირთვა:</label>
-              <div
-                class="border-2 border-dashed border-gray-300 rounded-lg p-8 text-center bg-white"
-              >
                 <button
                   type="button"
-                  class="text-[#4461F2] border border-[#4461F2] rounded-lg px-8 py-2"
+                  (click)="nextStep()"
+                  class="w-full bg-[#4461F2] text-white py-4 rounded-lg font-medium text-lg"
                 >
-                  ატვირთვა
+                  შემდეგი
                 </button>
               </div>
-            </div>
+            }
+            @if (currentStep() === 2) {
+              <div class="space-y-6">
+                <div>
+                  <label class="block mb-2 font-bold">პროდუქცია:</label>
+                  <select
+                    formControlName="product"
+                    class="w-full px-4 py-3 rounded-lg bg-white border border-gray-200 appearance-none"
+                  >
+                    <option value="" disabled selected>
+                      პირველი შესაძებელი ნივთი
+                    </option>
+                    <!-- Add product options -->
+                  </select>
+                </div>
 
-            <div class="flex gap-4">
-              <button
-                type="button"
-                (click)="previousStep()"
-                class="flex-1 bg-gray-200 text-gray-800 py-4 rounded-lg font-medium text-lg"
-              >
-                უკან დაბრუნება
-              </button>
-              <button
-                type="submit"
-                class="flex-1 bg-[#4461F2] text-white py-4 rounded-lg font-medium text-lg"
-              >
-                შეკვეთა
-              </button>
-            </div>
+                <div>
+                  <label class="block mb-2 font-bold"
+                    >საკონტაქტო ინფორმაცია:</label
+                  >
+                  <div class="relative">
+                    <i
+                      class="fa-solid fa-phone absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"
+                    ></i>
+                    <input
+                      type="text"
+                      formControlName="contactInfo"
+                      class="w-full pl-12 pr-4 py-3 rounded-lg bg-white border border-gray-200"
+                      placeholder="მობილურის ნომერი"
+                    />
+                  </div>
+                </div>
+
+                <div>
+                  <label class="block mb-2 font-bold">პროდუქციის აღწერა:</label>
+                  <textarea
+                    formControlName="description"
+                    rows="4"
+                    class="w-full px-4 py-3 rounded-lg bg-white border border-gray-200"
+                    placeholder="დეტალური აღწერა თუ როგორი პროდუქტი მასურთ"
+                  ></textarea>
+                </div>
+
+                <!-- File Upload -->
+                <div>
+                  <label class="block mb-2 font-bold"
+                    >ფოტო სურათის ატვირთვა:</label
+                  >
+                  <div
+                    class="border-2 border-dashed border-gray-300 rounded-lg p-8 text-center bg-white"
+                  >
+                    <button
+                      type="button"
+                      class="text-[#4461F2] border border-[#4461F2] rounded-lg px-8 py-2"
+                    >
+                      ატვირთვა
+                    </button>
+                  </div>
+                </div>
+
+                <div class="flex gap-4">
+                  <button
+                    type="button"
+                    (click)="previousStep()"
+                    class="flex-1 bg-gray-200 text-gray-800 py-4 rounded-lg font-medium text-lg"
+                  >
+                    უკან დაბრუნება
+                  </button>
+                  <button
+                    type="submit"
+                    class="flex-1 bg-[#4461F2] text-white py-4 rounded-lg font-medium text-lg cursor-pointer"
+                  >
+                    შეკვეთა
+                  </button>
+                </div>
+              </div>
+            }
           </div>
-          }
-        </div>
 
-        <!-- Desktop Form -->
-        <div class="hidden md:block">
-          <!-- 2-Column Grid Layout -->
-          <div class="grid grid-cols-2 gap-6 mb-6">
-            <div>
-              <label class="block mb-2 font-bold">სრული სახელი:</label>
-              <div class="relative">
-                <i
-                  class="fa-regular fa-user absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"
-                ></i>
-                <input
-                  type="text"
-                  formControlName="fullName"
-                  class="w-full pl-12 pr-4 py-3 rounded-lg bg-gray-50 border border-gray-200"
-                  placeholder="სახელი და გვარი"
-                />
-              </div>
-              @if (showError('fullName')) {
-              <span class="text-red-500 text-sm mt-1 block">{{
-                getErrorMessage("fullName")
-              }}</span>
-              }
-            </div>
-
-            <div>
-              <label class="block mb-2 font-bold">იმეილი:</label>
-              <div class="relative">
-                <i
-                  class="fa-regular fa-envelope absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"
-                ></i>
-                <input
-                  type="email"
-                  formControlName="email"
-                  class="w-full pl-12 pr-4 py-3 rounded-lg bg-gray-50 border border-gray-200"
-                  placeholder="იმეილი"
-                />
-              </div>
-              @if (showError('email')) {
-              <span class="text-red-500 text-sm mt-1 block">{{
-                getErrorMessage("email")
-              }}</span>
-              }
-            </div>
-
-            <div>
-              <label class="block mb-2 font-bold">ქალაქი:</label>
-              <select
-                formControlName="city"
-                class="w-full px-4 py-3 rounded-lg bg-gray-50 border border-gray-200 appearance-none"
-              >
-                <option value="" disabled selected>ქალაქი</option>
-                @for (city of cities(); track city.value) {
-                <option [value]="city.value">{{ city.label }}</option>
+          <!-- Desktop Form -->
+          <div class="hidden md:block">
+            <!-- 2-Column Grid Layout -->
+            <div class="grid grid-cols-2 gap-6 mb-6">
+              <div>
+                <label class="block mb-2 font-bold">სრული სახელი:</label>
+                <div class="relative">
+                  <i
+                    class="fa-regular fa-user absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"
+                  ></i>
+                  <input
+                    type="text"
+                    formControlName="fullName"
+                    class="w-full pl-12 pr-4 py-3 rounded-lg bg-gray-50 border border-gray-200"
+                    placeholder="სახელი და გვარი"
+                  />
+                </div>
+                @if (showError("fullName")) {
+                  <span class="text-red-500 text-sm mt-1 block">{{
+                    getErrorMessage("fullName")
+                  }}</span>
                 }
-              </select>
-              @if (showError('city')) {
-              <span class="text-red-500 text-sm mt-1 block">{{
-                getErrorMessage("city")
-              }}</span>
-              }
-            </div>
+              </div>
 
-            <div>
-              <label class="block mb-2 font-bold">ZIP კოდი:</label>
-              <input
-                type="text"
-                formControlName="zipCode"
-                class="w-full px-4 py-3 rounded-lg bg-gray-50 border border-gray-200"
-                placeholder="ქალაქის ZIP კოდი"
-              />
-              @if (showError('zipCode')) {
-              <span class="text-red-500 text-sm mt-1 block">{{
-                getErrorMessage("zipCode")
-              }}</span>
-              }
-            </div>
+              <div>
+                <label class="block mb-2 font-bold">იმეილი:</label>
+                <div class="relative">
+                  <i
+                    class="fa-regular fa-envelope absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"
+                  ></i>
+                  <input
+                    type="email"
+                    formControlName="email"
+                    class="w-full pl-12 pr-4 py-3 rounded-lg bg-gray-50 border border-gray-200"
+                    placeholder="იმეილი"
+                  />
+                </div>
+                @if (showError("email")) {
+                  <span class="text-red-500 text-sm mt-1 block">{{
+                    getErrorMessage("email")
+                  }}</span>
+                }
+              </div>
 
-            <div>
-              <label class="block mb-2 font-bold">პროდუქცია:</label>
-              <select
-                formControlName="product"
-                class="w-full px-4 py-3 rounded-lg bg-gray-50 border border-gray-200 appearance-none"
-              >
-                <option value="" disabled selected>
-                  პირველი შესაძებელი ნივთი
-                </option>
-                <!-- Add product options -->
-              </select>
-            </div>
+              <div>
+                <label class="block mb-2 font-bold">ქალაქი:</label>
+                <select
+                  formControlName="city"
+                  class="w-full px-4 py-3 rounded-lg bg-gray-50 border border-gray-200 appearance-none"
+                >
+                  <option value="" disabled selected>ქალაქი</option>
+                  @for (city of cities(); track city.value) {
+                    <option [value]="city.value">{{ city.label }}</option>
+                  }
+                </select>
+                @if (showError("city")) {
+                  <span class="text-red-500 text-sm mt-1 block">{{
+                    getErrorMessage("city")
+                  }}</span>
+                }
+              </div>
 
-            <div>
-              <label class="block mb-2 font-bold">საკონტაქტო ინფორმაცია:</label>
-              <div class="relative">
-                <i
-                  class="fa-solid fa-phone absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"
-                ></i>
+              <div>
+                <label class="block mb-2 font-bold">ZIP კოდი:</label>
                 <input
                   type="text"
-                  formControlName="contactInfo"
-                  class="w-full pl-12 pr-4 py-3 rounded-lg bg-gray-50 border border-gray-200"
-                  placeholder="მობილურის ნომერი"
+                  formControlName="zipCode"
+                  class="w-full px-4 py-3 rounded-lg bg-gray-50 border border-gray-200"
+                  placeholder="ქალაქის ZIP კოდი"
                 />
+                @if (showError("zipCode")) {
+                  <span class="text-red-500 text-sm mt-1 block">{{
+                    getErrorMessage("zipCode")
+                  }}</span>
+                }
               </div>
-            </div>
-          </div>
 
-          <!-- Full Width Fields -->
-          <div class="space-y-6">
-            <div>
-              <label class="block mb-2 font-bold">პროდუქციის აღწერა:</label>
-              <textarea
-                formControlName="description"
-                rows="4"
-                class="w-full px-4 py-3 rounded-lg bg-gray-50 border border-gray-200"
-                placeholder="დეტალური აღწერა თუ როგორი პროდუქტი მასურთ"
-              ></textarea>
-            </div>
-
-            <!-- File Upload -->
-            <div>
-              <label class="block mb-2 font-bold">ფოტო სურათის ატვირთვა:</label>
-              <div
-                class="border-2 border-dashed border-gray-300 rounded-lg p-8 text-center"
-              >
-                <button
-                  type="button"
-                  class="text-[#4461F2] border border-[#4461F2] rounded-lg px-8 py-2"
+              <div>
+                <label class="block mb-2 font-bold">პროდუქცია:</label>
+                <select
+                  formControlName="product"
+                  class="w-full px-4 py-3 rounded-lg bg-gray-50 border border-gray-200 appearance-none"
                 >
-                  ატვირთვა
-                </button>
+                  <option value="" disabled selected>
+                    პირველი შესაძებელი ნივთი
+                  </option>
+                  <!-- Add product options -->
+                </select>
+              </div>
+
+              <div>
+                <label class="block mb-2 font-bold"
+                  >საკონტაქტო ინფორმაცია:</label
+                >
+                <div class="relative">
+                  <i
+                    class="fa-solid fa-phone absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"
+                  ></i>
+                  <input
+                    type="text"
+                    formControlName="contactInfo"
+                    class="w-full pl-12 pr-4 py-3 rounded-lg bg-gray-50 border border-gray-200"
+                    placeholder="მობილურის ნომერი"
+                  />
+                </div>
+              </div>
+            </div>
+
+            <!-- Full Width Fields -->
+            <div class="space-y-6">
+              <div>
+                <label class="block mb-2 font-bold">პროდუქციის აღწერა:</label>
+                <textarea
+                  formControlName="description"
+                  rows="4"
+                  class="w-full px-4 py-3 rounded-lg bg-gray-50 border border-gray-200"
+                  placeholder="დეტალური აღწერა თუ როგორი პროდუქტი მასურთ"
+                ></textarea>
+              </div>
+
+              <!-- File Upload -->
+              <div>
+                <label class="block mb-2 font-bold"
+                  >ფოტო სურათის ატვირთვა:</label
+                >
+                <div
+                  class="border-2 border-dashed border-gray-300 rounded-lg p-8 text-center"
+                >
+                  <button
+                    type="button"
+                    class="text-[#4461F2] border border-[#4461F2] rounded-lg px-8 py-2 cursor-pointer hover:bg-[#4461F2] hover:text-white transition-colors duration-200"
+                  >
+                    ატვირთვა
+                  </button>
+                </div>
               </div>
             </div>
           </div>
-        </div>
 
-        <!-- Submit Button -->
-        <button
-          type="submit"
-          class="hidden md:block w-full bg-[#4461F2] text-white py-4 rounded-lg font-medium text-lg mt-8"
-        >
-          შეკვეთა
-        </button>
-      </form>
+          <!-- Submit Button -->
+          <button
+            type="submit"
+            class="hidden md:block w-full bg-[#4461F2] text-white py-4 rounded-lg font-medium text-lg mt-8 cursor-pointer hover:bg-[#3751CC] hover:shadow-md transition duration-200"
+          >
+            შეკვეთა
+          </button>
+        </form>
+      </div>
     </div>
   </div>
 </div>

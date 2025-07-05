@@ -4,8 +4,6 @@ import { Component } from '@angular/core';
   selector: 'app-hero-images',
   imports: [],
   templateUrl: './hero-images.component.html',
-  styleUrl: './hero-images.component.css'
+  styleUrl: './hero-images.component.css',
 })
-export class HeroImagesComponent {
-
-}
+export class HeroImagesComponent {}

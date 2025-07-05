@@ -1,0 +1,27 @@
+<div
+  class="pt-4 pr-4 pb-[14px] pl-4 bg-[#F9F9F9] rounded-[20px] w-[374px] h-[249px] md:w-[472px] md:h-[249px]"
+>
+  <div class="text-[18px] font-bold">კალათა</div>
+  <div class="mt-[9px] text-base font-medium flex justify-between">
+    <span>პროდუქტები ({{ getBasketLenght() }})</span>
+    <span>{{ getTotalPrice() }}₾</span>
+  </div>
+  <div class="text-base font-medium flex justify-between">
+    <span>მიტანის საფასური</span>
+    <span>{{ deliveryFeee }}₾</span>
+  </div>
+  <div
+    class="mt-3 space-y-2 pt-[15px] pr-[15px] pb-[14px] pl-[15px] bg-white rounded-[20px]"
+  >
+    <div class="flex justify-between">
+      <span>ჯამური ღირებულება</span>
+      <span>{{ getTotalPrice() }}₾</span>
+    </div>
+    <button
+      class="py-[18px] pr-[15px] pl-5 bg-[#EEAF50D6] rounded-lg flex justify-between items-center w-full cursor-pointer"
+    >
+      <span class="text-white font-semibold">ფასდაკლების კოდი</span>
+      <i class="fa-solid fa-ticket text-white text-[24px]"></i>
+    </button>
+  </div>
+</div>

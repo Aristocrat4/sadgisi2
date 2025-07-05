@@ -1,69 +1,80 @@
-<div class="max-w-[1260px] mx-auto px-4 md:px-6 py-8">
+<!-- Show loading or message if product not found -->
+<div *ngIf="!product" class="text-center py-12">
+  <p class="text-gray-500">
+    პროდუქტი ვერ მოიძებნა ან დატვირთვა მიმდინარეობს...
+  </p>
+</div>
+
+<!-- Main content: show only if product is loaded -->
+<div *ngIf="product as p" class="max-w-[1260px] mx-auto px-4 md:px-6 py-8">
   <div class="grid grid-cols-1 lg:grid-cols-[1.5fr_1fr] gap-8">
     <!-- Image Gallery Section -->
     <div
       class="relative aspect-[4/3] md:aspect-square bg-gray-100 rounded-lg overflow-hidden"
     >
       <img
-        [src]="product.images[0]"
+        [src]="p.images[0]"
         alt="Product"
         class="w-full h-full object-cover"
       />
 
-      <!-- Navigation Arrows -->
+      <!-- Navigation Arrows (Add click handlers if you implement image switching) -->
       <button
-        class="absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white/80 flex items-center justify-center"
+        class="absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white/80 flex items-center justify-center cursor-pointer"
       >
         <i class="fa-solid fa-chevron-left"></i>
       </button>
       <button
-        class="absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white/80 flex items-center justify-center"
+        class="absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white/80 flex items-center justify-center cursor-pointer"
       >
         <i class="fa-solid fa-chevron-right"></i>
       </button>
 
       <!-- Image Dots -->
       <div class="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2">
-        @for (image of product.images; track $index) {
         <button
-          class="w-2 h-2 rounded-full"
-          [class]="$index === 0 ? 'bg-blue-600' : 'bg-white/60'"
+          *ngFor="let image of p.images; let i = index"
+          class="w-2 h-2 rounded-full cursor-pointer"
+          [ngClass]="i === 0 ? 'bg-blue-600' : 'bg-white/60'"
         ></button>
-        }
       </div>
     </div>
 
     <!-- Product Info Section -->
     <div class="space-y-6">
-      <h1 class="text-2xl font-medium">{{ product.name }}</h1>
-      <p class="text-gray-600">{{ product.description }}</p>
+      <h1 class="text-2xl font-medium">{{ p.name }}</h1>
+      <p class="text-gray-600">{{ p.description }}</p>
 
       <!-- Rating -->
       <div class="flex items-center gap-2">
         <div class="flex">
-          @for (star of [1,2,3,4,5]; track star) {
           <i
+            *ngFor="let star of [1, 2, 3, 4, 5]"
             class="fa-solid fa-star"
-            [class]="star <= 4 ? 'text-yellow-400' : 'text-gray-300'"
+            [ngClass]="star <= p.rating ? 'text-yellow-400' : 'text-gray-300'"
           ></i>
-          }
         </div>
-        <span class="text-gray-600">{{ product.rating }}</span>
+        <span class="text-gray-600">{{ p.rating }}</span>
       </div>
 
       <!-- Price -->
-      <div class="text-2xl font-bold text-[#5086EE]">₾{{ product.price }}</div>
+      <div class="text-2xl font-bold text-[#5086EE]">₾{{ p.price }}</div>
 
       <!-- Colors -->
-      <div>
-        <h3 class="text-lg mb-3">ფერი:</h3>
-        <div class="flex gap-3">
-          @for (color of product.colors; track color) {
+      <div class="mb-6">
+        <h2 class="flex items-center gap-2 text-lg mb-4">
+          <div class="w-1 h-5 bg-blue-600"></div>
+          ფერი:
+        </h2>
+        <div class="flex flex-wrap gap-3">
           <button
-            class="w-8 h-8 rounded-full"
-            [style.background-color]="color"
+            *ngFor="let color of p.colors; let i = index"
+            (click)="selectedColorIndex = i"
+            class="w-8 h-8 rounded-full cursor-pointer hover:ring-2 hover:ring-offset-2"
+            [class.ring-2]="selectedColorIndex === i"
+            [class.ring-offset-2]="selectedColorIndex === i"
+            [style.backgroundColor]="color"
           ></button>
-          }
         </div>
       </div>
 
@@ -71,8 +82,8 @@
       <div>
         <h3 class="text-lg mb-3">აღწერა:</h3>
         <ul class="space-y-2 text-gray-600">
-          <li>• {{ product.description_long }}</li>
-          <li>• {{ product.additional_info }}</li>
+          <li>• {{ p.description_long }}</li>
+          <li>• {{ p.additional_info }}</li>
         </ul>
       </div>
 
@@ -80,30 +91,40 @@
       <div>
         <h3 class="text-lg mb-3">რაოდენობა:</h3>
         <p class="text-gray-600">
-          მარაგში დარჩენილია {{ product.quantity_in_stock }} ცალი
+          მარაგში დარჩენილია {{ p.quantity_in_stock }} ცალი
         </p>
       </div>
 
       <!-- Action Buttons -->
       <div class="flex gap-4">
         <button
-          class="flex-1 bg-[#9BA5B7] text-white py-4 rounded-lg font-medium text-lg"
+          class="flex-1 bg-[#9BA5B7] hover:bg-[#8b94a4] transition-colors duration-200 text-white py-4 rounded-lg font-medium text-lg cursor-pointer"
         >
           შეკვეთა
         </button>
+
         <button
-          class="flex-1 bg-[#4461F2] text-white py-4 rounded-lg font-medium text-lg flex items-center justify-center gap-2"
+          class="flex-1 bg-[#4461F2] hover:bg-[#3753c7] transition-colors duration-200 text-white py-4 rounded-lg font-medium text-lg flex items-center justify-center gap-2 cursor-pointer"
+          (click)="addIntoBasket()"
         >
           დამატება <i class="fa-solid fa-cart-shopping"></i>
         </button>
         <button
-          class="w-14 h-14 flex items-center justify-center rounded-lg bg-gray-50"
+          (click)="toggleFavorite()"
+          class="w-14 h-14 flex items-center justify-center rounded-lg bg-gray-50 cursor-pointer"
+          [attr.aria-pressed]="isFavorite()"
         >
-          <i class="fa-regular fa-heart text-lg"></i>
+          <i
+            class="text-lg fa-heart"
+            [class.fa-solid]="isFavorite()"
+            [class.fa-regular]="!isFavorite()"
+            [class.text-red-600]="isFavorite()"
+          ></i>
         </button>
       </div>
     </div>
   </div>
 </div>
 
+<!-- Include questions component if needed -->
 <app-questions></app-questions>

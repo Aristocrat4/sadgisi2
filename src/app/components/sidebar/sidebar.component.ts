@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, HostListener } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { Subscription } from 'rxjs';
@@ -21,21 +21,24 @@ export class SidebarComponent implements OnInit, OnDestroy {
   constructor(
     private sidebarService: SidebarService,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
   ) {}
 
   ngOnInit() {
     this.sidebarSubscription = this.sidebarService.sidebarOpen$.subscribe(
       (isOpen) => {
         this.isOpen = isOpen;
-      }
+      },
     );
 
     this.authSubscription = this.authService.isAuthenticated$.subscribe(
       (isAuthenticated) => {
         this.isLoggedIn = isAuthenticated;
-      }
+      },
     );
+
+    // Initial check on component load
+    this.checkWindowSize(window.innerWidth);
   }
 
   ngOnDestroy() {
@@ -60,5 +63,18 @@ export class SidebarComponent implements OnInit, OnDestroy {
     this.authService.logout();
     this.router.navigate(['/auth/sign-in']);
     this.closeSidebar();
+  }
+
+  @HostListener('window:resize', ['$event'])
+  onResize(event: any) {
+    const width = event.target.innerWidth;
+    this.checkWindowSize(width);
+  }
+
+  private checkWindowSize(width: number) {
+    const mdBreakpoint = 1260;
+    if (width >= mdBreakpoint && this.isOpen) {
+      this.sidebarService.closeSidebar();
+    }
   }
 }

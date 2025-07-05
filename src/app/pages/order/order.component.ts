@@ -1,4 +1,4 @@
-import { Component, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
   ReactiveFormsModule,
@@ -12,11 +12,13 @@ import {
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './order.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class OrderComponent {
   email = signal('sadgisileather@gmail.com');
   currentStep = signal(1);
   orderForm: FormGroup;
+
   cities = signal([
     { value: 'tbilisi', label: 'თბილისი' },
     { value: 'batumi', label: 'ბათუმი' },

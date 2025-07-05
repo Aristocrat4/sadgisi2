@@ -4,52 +4,35 @@
   <h2 class="font-bold text-base min-lg:text-[28px] text-[#0A0B26] mb-[5px]">
     ხშირად დასმული კითხვები
   </h2>
-  <div
-    class="qstn rounded-[20px] relative bg-white w-full pl-[15px] min-lg:pl-10 py-[6px] min-lg:py-4"
-  >
-    <p class="text-xs min-lg:text-[18px] font-medium text-[#113B52]">
-      გაქვთ თუ არა მიტანის სერვისი?
-    </p>
+
+  @for (faq of faqs; let i = $index; track i) {
     <div
-      class="qstn absolute top-[11px] min-lg:top-[25px] right-[10px] min-lg:right-[20px] bg-white rounded-full"
+      class="qstn rounded-[20px] relative bg-white w-full pl-[15px] min-lg:pl-10 py-[6px] min-lg:py-4 cursor-pointer overflow-hidden"
+      (click)="toggleFaq(i)"
     >
-      <img src="/assets/down.svg" alt="down-arrow" />
+      <p class="text-xs min-lg:text-[18px] font-medium text-[#113B52]">
+        {{ faq.question }}
+      </p>
+
+      <div
+        class="qstn absolute top-[11px] min-lg:top-[25px] right-[10px] min-lg:right-[20px] bg-white rounded-full transition-transform duration-400"
+        [class.rotate-180]="openIndex === i"
+      >
+        <img src="/assets/down.svg" alt="arrow" />
+      </div>
+
+      <div
+        class="transition-all duration-400"
+        [ngClass]="{
+          'max-h-0 opacity-0': openIndex !== i,
+          'max-h-[500px] opacity-100 mt-2 pr-10': openIndex === i,
+        }"
+        style="overflow: hidden"
+      >
+        <p class="text-xs min-lg:text-[16px] text-[#333]">
+          {{ faq.answer }}
+        </p>
+      </div>
     </div>
-  </div>
-  <div
-    class="qstn rounded-[20px] relative bg-white w-full pl-[15px] min-lg:pl-10 py-[6px] min-lg:py-4"
-  >
-    <p class="text-xs min-lg:text-[18px] font-medium text-[#113B52]">
-      როგორ ხდება შეძენა?
-    </p>
-    <div
-      class="qstn absolute top-[11px] min-lg:top-[25px] right-[10px] min-lg:right-[20px] bg-white rounded-full"
-    >
-      <img src="/assets/down.svg" alt="down-arrow" />
-    </div>
-  </div>
-  <div
-    class="qstn rounded-[20px] relative bg-white w-full pl-[15px] min-lg:pl-10 py-[6px] min-lg:py-4"
-  >
-    <p class="text-xs min-lg:text-[18px] font-medium text-[#113B52]">
-      პროდუქტის უკან დაბრუნება?
-    </p>
-    <div
-      class="qstn absolute top-[11px] min-lg:top-[25px] right-[10px] min-lg:right-[20px] bg-white rounded-full"
-    >
-      <img src="/assets/down.svg" alt="down-arrow" />
-    </div>
-  </div>
-  <div
-    class="qstn rounded-[20px] relative bg-white w-full pl-[15px] min-lg:pl-10 py-[6px] min-lg:py-4"
-  >
-    <p class="text-xs min-lg:text-[18px] font-medium text-[#113B52]">
-      რეგიონებში მიტანის სერვისი?
-    </p>
-    <div
-      class="qstn absolute top-[11px] min-lg:top-[25px] right-[10px] min-lg:right-[20px] bg-white rounded-full"
-    >
-      <img src="/assets/down.svg" alt="down-arrow" />
-    </div>
-  </div>
+  }
 </section>

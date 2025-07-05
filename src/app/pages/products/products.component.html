@@ -33,24 +33,39 @@
           კატეგორიები:
         </h2>
         <div class="space-y-3">
-          <label class="flex items-center gap-3">
-            <input type="checkbox" class="w-5 h-5 border-gray-300 rounded" />
+          <label class="flex items-center gap-3 cursor-pointer">
+            <input
+              type="checkbox"
+              class="w-5 h-5 border-gray-300 rounded cursor-pointer"
+            />
             <span class="text-gray-700">თამბაქოს ჩანთა</span>
           </label>
-          <label class="flex items-center gap-3">
-            <input type="checkbox" class="w-5 h-5 border-gray-300 rounded" />
+          <label class="flex items-center gap-3 cursor-pointer">
+            <input
+              type="checkbox"
+              class="w-5 h-5 border-gray-300 rounded cursor-pointer"
+            />
             <span class="text-gray-700">ჩანთა</span>
           </label>
-          <label class="flex items-center gap-3">
-            <input type="checkbox" class="w-5 h-5 border-gray-300 rounded" />
+          <label class="flex items-center gap-3 cursor-pointer">
+            <input
+              type="checkbox"
+              class="w-5 h-5 border-gray-300 rounded cursor-pointer"
+            />
             <span class="text-gray-700">ქამარი</span>
           </label>
-          <label class="flex items-center gap-3">
-            <input type="checkbox" class="w-5 h-5 border-gray-300 rounded" />
+          <label class="flex items-center gap-3 cursor-pointer">
+            <input
+              type="checkbox"
+              class="w-5 h-5 border-gray-300 rounded cursor-pointer"
+            />
             <span class="text-gray-700">საფულე</span>
           </label>
-          <label class="flex items-center gap-3">
-            <input type="checkbox" class="w-5 h-5 border-gray-300 rounded" />
+          <label class="flex items-center gap-3 cursor-pointer">
+            <input
+              type="checkbox"
+              class="w-5 h-5 border-gray-300 rounded cursor-pointer"
+            />
             <span class="text-gray-700">სახელდე</span>
           </label>
         </div>
@@ -63,12 +78,18 @@
           მატერია:
         </h2>
         <div class="space-y-3">
-          <label class="flex items-center gap-3">
-            <input type="checkbox" class="w-5 h-5 border-gray-300 rounded" />
+          <label class="flex items-center gap-3 cursor-pointer">
+            <input
+              type="checkbox"
+              class="w-5 h-5 border-gray-300 rounded cursor-pointer"
+            />
             <span class="text-gray-700">იტალიური ტყავი</span>
           </label>
-          <label class="flex items-center gap-3">
-            <input type="checkbox" class="w-5 h-5 border-gray-300 rounded" />
+          <label class="flex items-center gap-3 cursor-pointer">
+            <input
+              type="checkbox"
+              class="w-5 h-5 border-gray-300 rounded cursor-pointer"
+            />
             <span class="text-gray-700">ქართული ტყავი</span>
           </label>
         </div>
@@ -81,24 +102,15 @@
           ფერი:
         </h2>
         <div class="flex flex-wrap gap-3">
-          <button
-            class="w-8 h-8 rounded-full bg-[#C4977C] hover:ring-2 hover:ring-offset-2 hover:ring-[#C4977C]"
-          ></button>
-          <button
-            class="w-8 h-8 rounded-full bg-[#8B4513] hover:ring-2 hover:ring-offset-2 hover:ring-[#8B4513]"
-          ></button>
-          <button
-            class="w-8 h-8 rounded-full bg-[#654321] hover:ring-2 hover:ring-offset-2 hover:ring-[#654321]"
-          ></button>
-          <button
-            class="w-8 h-8 rounded-full bg-[#8B7355] hover:ring-2 hover:ring-offset-2 hover:ring-[#8B7355]"
-          ></button>
-          <button
-            class="w-8 h-8 rounded-full bg-[#696969] hover:ring-2 hover:ring-offset-2 hover:ring-[#696969]"
-          ></button>
-          <button
-            class="w-8 h-8 rounded-full bg-black hover:ring-2 hover:ring-offset-2 hover:ring-black"
-          ></button>
+          @for (color of colors; let i = $index; track i) {
+            <button
+              (click)="selectedColorIndex = i"
+              class="w-8 h-8 rounded-full cursor-pointer hover:ring-2 hover:ring-offset-2"
+              [class.ring-2]="selectedColorIndex === i"
+              [class.ring-offset-2]="selectedColorIndex === i"
+              [style.backgroundColor]="color"
+            ></button>
+          }
         </div>
       </div>
 
@@ -121,88 +133,14 @@
           />
         </div>
         <button
-          class="w-full bg-transparent text-[#0000009C] py-3.5 rounded-lg transition-colors"
+          class="w-full bg-transparent text-[#0000009C] py-3.5 rounded-lg transition-colors cursor-pointer"
         >
           გაფილტვრა
         </button>
       </div>
     </aside>
 
-    <!-- Products Section Container -->
-    <div>
-      <!-- Products Grid -->
-      <main class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        @for (i of [1, 2, 3, 4, 5, 6]; track i) {
-        <div
-          class="border border-gray-200 rounded-lg p-4 hover:shadow-lg transition-shadow cursor-pointer"
-          [routerLink]="['/products', i]"
-        >
-          <div class="aspect-[4/3] mb-4">
-            <img
-              src="https://placehold.co/400x300"
-              alt="Product"
-              class="w-full h-full object-cover rounded-md"
-            />
-          </div>
-          <div class="flex justify-between items-center mb-3">
-            <div class="flex gap-2">
-              <button class="w-5 h-5 rounded-full bg-[#C4977C]"></button>
-              <button class="w-5 h-5 rounded-full bg-[#8B4513]"></button>
-              <button class="w-5 h-5 rounded-full bg-black"></button>
-            </div>
-            <div class="flex gap-2">
-              <button
-                class="w-10 h-10 rounded-full bg-gray-50 flex items-center justify-center hover:bg-gray-100 transition-colors"
-              >
-                <i class="fa-regular fa-heart text-base"></i>
-              </button>
-              <button
-                class="w-10 h-10 rounded-full bg-gray-50 flex items-center justify-center hover:bg-gray-100 transition-colors"
-              >
-                <i class="fa-solid fa-cart-shopping"></i>
-              </button>
-            </div>
-          </div>
-          <h3 class="text-lg font-medium mb-2">თამბაქოს ჩანთა</h3>
-          <p class="text-sm text-gray-600 mb-4">
-            ქართული ტყავით დამზადებული თითოეული შესანახი ჩანთა
-          </p>
-          <div class="flex justify-between items-center">
-            <span class="text-lg font-bold text-[#5086EE]">₾75</span>
-          </div>
-        </div>
-        }
-      </main>
-
-      <!-- Pagination -->
-      <div class="flex justify-center items-center gap-1 mt-8">
-        <button
-          class="min-w-11 h-11 flex items-center justify-center rounded-lg bg-[#4461F2] text-white font-medium"
-        >
-          1
-        </button>
-        <button
-          class="min-w-11 h-11 flex items-center justify-center rounded-lg text-[#00000099] hover:bg-gray-50 font-medium"
-        >
-          2
-        </button>
-        <button
-          class="min-w-11 h-11 flex items-center justify-center rounded-lg text-[#00000099] hover:bg-gray-50 font-medium"
-        >
-          3
-        </button>
-        <button
-          class="min-w-11 h-11 flex items-center justify-center rounded-lg text-[#00000099] hover:bg-gray-50 font-medium"
-        >
-          4
-        </button>
-        <button
-          class="min-w-11 h-11 flex items-center justify-center rounded-lg text-[#00000099] hover:bg-gray-50 font-medium"
-        >
-          5
-        </button>
-      </div>
-    </div>
+    <app-product-listing />
   </div>
 </div>
 <app-questions></app-questions>

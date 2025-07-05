@@ -28,10 +28,10 @@
                   placeholder="სახელი და გვარი"
                 />
               </div>
-              @if (showError('fullName')) {
-              <span class="text-red-500 text-sm mt-1 block">{{
-                getErrorMessage("fullName")
-              }}</span>
+              @if (showError("fullName")) {
+                <span class="text-red-500 text-sm mt-1 block">{{
+                  getErrorMessage("fullName")
+                }}</span>
               }
             </div>
 
@@ -48,10 +48,10 @@
                   placeholder="იმეილი"
                 />
               </div>
-              @if (showError('email')) {
-              <span class="text-red-500 text-sm mt-1 block">{{
-                getErrorMessage("email")
-              }}</span>
+              @if (showError("email")) {
+                <span class="text-red-500 text-sm mt-1 block">{{
+                  getErrorMessage("email")
+                }}</span>
               }
             </div>
 
@@ -66,10 +66,10 @@
                 <option value="batumi">ბათუმი</option>
                 <option value="kutaisi">ქუთაისი</option>
               </select>
-              @if (showError('city')) {
-              <span class="text-red-500 text-sm mt-1 block">{{
-                getErrorMessage("city")
-              }}</span>
+              @if (showError("city")) {
+                <span class="text-red-500 text-sm mt-1 block">{{
+                  getErrorMessage("city")
+                }}</span>
               }
             </div>
 
@@ -86,10 +86,10 @@
                   placeholder="მობილურის ნომერი"
                 />
               </div>
-              @if (showError('contactInfo')) {
-              <span class="text-red-500 text-sm mt-1 block">{{
-                getErrorMessage("contactInfo")
-              }}</span>
+              @if (showError("contactInfo")) {
+                <span class="text-red-500 text-sm mt-1 block">{{
+                  getErrorMessage("contactInfo")
+                }}</span>
               }
             </div>
 
@@ -106,10 +106,10 @@
                   placeholder="შეიყვანეთ პაროლი"
                 />
               </div>
-              @if (showError('password')) {
-              <span class="text-red-500 text-sm mt-1 block">{{
-                getErrorMessage("password")
-              }}</span>
+              @if (showError("password")) {
+                <span class="text-red-500 text-sm mt-1 block">{{
+                  getErrorMessage("password")
+                }}</span>
               }
             </div>
 
@@ -126,10 +126,10 @@
                   placeholder="გაიმეორეთ პაროლი"
                 />
               </div>
-              @if (showError('confirmPassword')) {
-              <span class="text-red-500 text-sm mt-1 block">{{
-                getErrorMessage("confirmPassword")
-              }}</span>
+              @if (showError("confirmPassword")) {
+                <span class="text-red-500 text-sm mt-1 block">{{
+                  getErrorMessage("confirmPassword")
+                }}</span>
               }
             </div>
           </div>
