@@ -9,22 +9,25 @@
 <div *ngIf="product as p" class="max-w-[1260px] mx-auto px-4 md:px-6 py-8">
   <div class="grid grid-cols-1 lg:grid-cols-[1.5fr_1fr] gap-8">
     <!-- Image Gallery Section -->
+    <!-- Image Carousel Section -->
     <div
       class="relative aspect-[4/3] md:aspect-square bg-gray-100 rounded-lg overflow-hidden"
     >
       <img
-        [src]="p.images[0]"
-        alt="Product"
-        class="w-full h-full object-cover"
+        [src]="product?.images?.[currentImageIndex]"
+        alt="Product Image"
+        class="w-full h-full object-cover transition-all duration-300"
       />
 
-      <!-- Navigation Arrows (Add click handlers if you implement image switching) -->
+      <!-- Navigation Arrows -->
       <button
+        (click)="prevImage()"
         class="absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white/80 flex items-center justify-center cursor-pointer"
       >
         <i class="fa-solid fa-chevron-left"></i>
       </button>
       <button
+        (click)="nextImage()"
         class="absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white/80 flex items-center justify-center cursor-pointer"
       >
         <i class="fa-solid fa-chevron-right"></i>
@@ -33,9 +36,13 @@
       <!-- Image Dots -->
       <div class="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2">
         <button
-          *ngFor="let image of p.images; let i = index"
-          class="w-2 h-2 rounded-full cursor-pointer"
-          [ngClass]="i === 0 ? 'bg-blue-600' : 'bg-white/60'"
+          *ngFor="let image of product?.images; let i = index"
+          (click)="goToImage(i)"
+          class="w-2 h-2 rounded-full cursor-pointer transition-all duration-200"
+          [ngClass]="{
+            'bg-blue-600 w-3 h-3': i === currentImageIndex,
+            'bg-white/60': i !== currentImageIndex,
+          }"
         ></button>
       </div>
     </div>
@@ -61,22 +68,24 @@
       <div class="text-2xl font-bold text-[#5086EE]">₾{{ p.price }}</div>
 
       <!-- Colors -->
-      <div class="mb-6">
-        <h2 class="flex items-center gap-2 text-lg mb-4">
-          <div class="w-1 h-5 bg-blue-600"></div>
-          ფერი:
-        </h2>
-        <div class="flex flex-wrap gap-3">
-          <button
-            *ngFor="let color of p.colors; let i = index"
-            (click)="selectedColorIndex = i"
-            class="w-8 h-8 rounded-full cursor-pointer hover:ring-2 hover:ring-offset-2"
-            [class.ring-2]="selectedColorIndex === i"
-            [class.ring-offset-2]="selectedColorIndex === i"
-            [style.backgroundColor]="color"
-          ></button>
+      @if (p.colors) {
+        <div class="mb-6">
+          <h2 class="flex items-center gap-2 text-lg mb-4">
+            <div class="w-1 h-5 bg-blue-600"></div>
+            ფერი:
+          </h2>
+          <div class="flex flex-wrap gap-3">
+            <button
+              *ngFor="let color of p.colors; let i = index"
+              (click)="selectedColorIndex = i"
+              class="w-8 h-8 rounded-full cursor-pointer hover:ring-2 hover:ring-offset-2"
+              [class.ring-2]="selectedColorIndex === i"
+              [class.ring-offset-2]="selectedColorIndex === i"
+              [style.backgroundColor]="color"
+            ></button>
+          </div>
         </div>
-      </div>
+      }
 
       <!-- Description -->
       <div>

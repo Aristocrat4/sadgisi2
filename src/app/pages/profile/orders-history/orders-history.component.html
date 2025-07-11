@@ -1,6 +1,6 @@
-<div class="flex flex-col gap-5 ">
+<div class="flex flex-col gap-5">
   <!-- Header Section -->
-  <div class="flex items-center gap-[15px] ">
+  <div class="flex items-center gap-[15px]">
     <i class="fa-solid fa-cart-shopping"></i>
     <span class="font-bold text-[18px] text-[#0D0E2D]">შეკვეთის ისტორია</span>
   </div>
@@ -9,7 +9,7 @@
   <div class="w-full max-w-3xl mx-auto mt-6">
     @for (order of mockOrders; track order.orderId) {
       <div
-        class="order-card flex flex-col gap-[10px] rounded-2xl border border-gray-200  transition-all duration-300 mb-4"
+        class="order-card flex flex-col gap-[10px] rounded-2xl border border-gray-200 transition-all duration-300 mb-4"
       >
         <!-- Order Summary Header (Always visible) -->
         <div
@@ -53,7 +53,7 @@
               >
                 <div class="flex items-center justify-between">
                   <img
-                    [src]="unit.images[0]"
+                    [src]="unit?.images?.[0]"
                     alt="sadgisi logo"
                     class="w-[139px] h-[122px] md:w-[192px] md:h-[122px] object-cover"
                   />
@@ -71,7 +71,7 @@
                       >ფერი:
                       <span
                         class="inline-block rounded-full cursor-pointer w-[13px] h-[13px] lg:w-[18px] lg:h-[18px]"
-                        [style.backgroundColor]="unit.colors[0]"
+                        [style.backgroundColor]="unit?.colors?.[0]"
                       >
                       </span>
                     </span>
@@ -95,7 +95,7 @@
                       შეკვეთის სტატუსი:
                     </div>
                     <button
-                      class="rounded-[20px] px-[10px] py-[8.5px] md:px-[26px] md:py-[11px] bg-[#F7B433] text-[#FFFFFF] cursor-pointer "
+                      class="rounded-[20px] px-[10px] py-[8.5px] md:px-[26px] md:py-[11px] bg-[#F7B433] text-[#FFFFFF] cursor-pointer"
                     >
                       მუშავდება
                     </button>

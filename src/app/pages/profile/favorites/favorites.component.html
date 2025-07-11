@@ -1,4 +1,4 @@
-<div class="flex flex-col gap-5 overflow-y-scroll">
+<div class="flex flex-col gap-5 overflow-y-auto">
   <!-- Header Section -->
   <!-- Title -->
   <div class="flex items-center gap-[15px]">
@@ -24,7 +24,7 @@
 
         <div class="flex gap-5">
           <img
-            [src]="favorite.images[0]"
+            [src]="favorite?.images?.[0]"
             alt="sadgisi logo"
             class="w-[139px] h-[122px] md:w-[192px] md:h-[122px]"
           />
@@ -40,7 +40,7 @@
               >ფერი:
               <span
                 class="inline-block rounded-full cursor-pointer w-[13px] h-[13px] lg:w-[18px] lg:h-[18px]"
-                [style.backgroundColor]="favorite.colors[0]"
+                [style.backgroundColor]="favorite?.colors?.[0]"
               >
               </span>
             </span>

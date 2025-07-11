@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { OrderHistory } from '../../../interfaces/product.interface';
 
 @Component({
   selector: 'app-orders-history',
@@ -11,7 +12,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 export class OrdersHistoryComponent {
   openOrderId: number | null = null;
 
-  mockOrders = [
+  mockOrders: OrderHistory[] = [
     {
       orderId: 9,
       number: '212121212132',
@@ -20,41 +21,63 @@ export class OrdersHistoryComponent {
       products: [
         {
           id: 1,
-          name: 'მამაკაცის იტალიური საფულე',
-          description: 'იტალიური ტყავით შექმნილი საფულე',
+          name: 'ყავისფერი ტყავის ქამარი',
+          description: 'მაღალი ხარისხის ნატურალი ტყავით და ბალთით.',
           price: 75,
           rating: 4.9,
-          description_long: 'იტევს 8-მდე ბარათს',
-          additional_info: 'განკუთვნილია კაკიერებისთვის',
+          description_long: 'ხელნაკეთი',
+          additional_info: 'ზომა - 110-135 სმ',
           quantity_in_stock: 5,
-          images: ['https://placehold.co/600x400'],
-          colors: ['#C4977C', '#8B4513'],
-          quanitity: 4,
-        },
-        {
-          id: 2,
-          name: 'მამაკაცის ქართული საფულე',
-          description: 'ქართული ტყავით შექმნილი საფულე',
-          price: 70,
-          rating: 4.7,
-          description_long: 'იტევს 6 ბარათს და ქეშს',
-          additional_info: 'იდეალურია ყოველდღიური გამოყენებისთვის',
-          quantity_in_stock: 4,
-          images: ['https://placehold.co/600x400'],
-          colors: ['black', '#696969'],
+          images: [
+            'assets/products/id-2-0.jpg',
+            'assets/products/id-2-1.jpg',
+            'assets/products/id-2-2.jpg',
+            'assets/products/id-2-3.jpg',
+            'assets/products/id-2-4.jpg',
+          ],
           quanitity: 4,
         },
         {
           id: 3,
-          name: 'მამაკაცის იტალიური ქამარი',
-          description: 'იტალიური ტყავით დამზადებული კლასიკური ქამარი',
-          price: 88,
-          rating: 4.6,
-          description_long: 'სიმძლავრე და ელეგანტურობა ერთ პროდუქში',
-          additional_info: 'ოფიციალური სტილის მოყვარულთათვის',
-          quantity_in_stock: 3,
-          images: ['https://placehold.co/600x400'],
-          colors: ['#654321', '#8B7355'],
+          name: 'საფულე ხევსურული ნაქარგით.  ',
+          description:
+            'ტრადიციისა და ხარისხის სინთეზი. მაღალი ხარისხის ნატურალი ტყავით და ბალთით.',
+          price: 75,
+          rating: 4.9,
+          description_long:
+            'კომპაქტური საფულე ქალებატონებისთვის. დამზადებულია ნატურალური ტყავისგან და გაფორმებულია ტრადიციული ხევსურული ნაქარგით, რაც ნივთს განსაკუთრებულს ხდის. ვინტაჟური ჩამკეტი მოხერხებულ და სწრაფ წვდომას უზრუნველყოფს მონეტებზე. აქვს ოთხი ბარათის ჯიბე (თითოეულში თავსდება 1-2 ბარათი) და სექცია ქეშისთვის (ლარი, დოლარი, ასევე ევრო).',
+          additional_info:
+            'მიუხედავად პატარა ზომისა (12 x 10 სმ), სპეციალური დიზაინი საფულეს ხდის ტევადს და მოხერხებულს ყოველდღიური გამოყენებისას.',
+          quantity_in_stock: 5,
+          images: [
+            'assets/products/id-3-0.jpg',
+            'assets/products/id-3-1.jpg',
+            'assets/products/id-3-2.jpg',
+            'assets/products/id-3-3.jpg',
+            'assets/products/id-3-4.jpg',
+            'assets/products/id-3-5.jpg',
+            'assets/products/id-3-6.jpg',
+            'assets/products/id-3-7.jpg',
+          ],
+          quanitity: 4,
+        },
+        {
+          id: 4,
+          name: 'სამაჯური ეგზოტიკური ტყავით',
+          description: 'მაღალი ხარისხის ნატურალი ტყავით და ბალთით.',
+          price: 75,
+          rating: 4.9,
+          description_long:
+            ' დამუშავებული და შეკრილი მთლიანად ხელით, ნატურალური სირაქლემას ტყავით.',
+          additional_info: 'ზომა (მაჯის) - 16-18 სმ',
+          quantity_in_stock: 5,
+          images: [
+            'assets/products/id-4-0.jpg',
+            'assets/products/id-4-1.jpg',
+            'assets/products/id-4-2.jpg',
+            'assets/products/id-4-3.jpg',
+            'assets/products/id-4-4.jpg',
+          ],
           quanitity: 4,
         },
       ],
