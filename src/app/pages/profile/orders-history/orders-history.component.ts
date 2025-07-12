@@ -28,6 +28,7 @@ export class OrdersHistoryComponent {
           description_long: 'ხელნაკეთი',
           additional_info: 'ზომა - 110-135 სმ',
           quantity_in_stock: 5,
+           colors: ['brown'],
           images: [
             'assets/products/id-2-0.jpg',
             'assets/products/id-2-1.jpg',
@@ -49,6 +50,7 @@ export class OrdersHistoryComponent {
           additional_info:
             'მიუხედავად პატარა ზომისა (12 x 10 სმ), სპეციალური დიზაინი საფულეს ხდის ტევადს და მოხერხებულს ყოველდღიური გამოყენებისას.',
           quantity_in_stock: 5,
+           colors: ['black'],
           images: [
             'assets/products/id-3-0.jpg',
             'assets/products/id-3-1.jpg',
@@ -71,6 +73,7 @@ export class OrdersHistoryComponent {
             ' დამუშავებული და შეკრილი მთლიანად ხელით, ნატურალური სირაქლემას ტყავით.',
           additional_info: 'ზომა (მაჯის) - 16-18 სმ',
           quantity_in_stock: 5,
+           colors: ['black'],
           images: [
             'assets/products/id-4-0.jpg',
             'assets/products/id-4-1.jpg',

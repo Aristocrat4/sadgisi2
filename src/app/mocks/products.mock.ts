@@ -3,13 +3,14 @@ import { ProductGroup } from '../interfaces/product.interface';
 export const productsListData: ProductGroup[] = [
   {
     id: 1,
-    name: 'ყავისფერი ტყავის ქამარი',
+    name: 'შავი ტყავის ქამარი',
     description: 'მაღალი ხარისხის ნატურალი ტყავით და ბალთით.',
     price: 75,
     rating: 4.9,
     description_long: 'ხელნაკეთი',
     additional_info: 'ზომა - 110-135 სმ',
     quantity_in_stock: 5,
+    colors: ['black'],
     images: [
       'assets/products/id-2-0.jpg',
       'assets/products/id-2-1.jpg',
@@ -28,6 +29,7 @@ export const productsListData: ProductGroup[] = [
     description_long: 'ხელნაკეთი',
     additional_info: 'ზომა - 110-135 სმ',
     quantity_in_stock: 5,
+     colors: ['brown'],
     images: [
       'assets/products/id-1-0.jpg',
       'assets/products/id-1-1.jpg',
@@ -51,6 +53,7 @@ export const productsListData: ProductGroup[] = [
     additional_info:
       'მიუხედავად პატარა ზომისა (12 x 10 სმ), სპეციალური დიზაინი საფულეს ხდის ტევადს და მოხერხებულს ყოველდღიური გამოყენებისას.',
     quantity_in_stock: 5,
+     colors: ['black'],
     images: [
       'assets/products/id-3-0.jpg',
       'assets/products/id-3-1.jpg',
@@ -73,6 +76,7 @@ export const productsListData: ProductGroup[] = [
       ' დამუშავებული და შეკრილი მთლიანად ხელით, ნატურალური სირაქლემას ტყავით.',
     additional_info: 'ზომა (მაჯის) - 16-18 სმ',
     quantity_in_stock: 5,
+     colors: ['black'],
     images: [
       'assets/products/id-4-0.jpg',
       'assets/products/id-4-1.jpg',
@@ -93,6 +97,7 @@ export const productsListData: ProductGroup[] = [
     additional_info:
       'ზომა (დაკეცილი) - 16/ 9 სმ. დამუშავებული და შეკერილი ხელით',
     quantity_in_stock: 5,
+     colors: ['brown'],
     images: [
       'assets/products/id-5-0.jpg',
       'assets/products/id-5-1.jpg',
