@@ -1,10 +1,23 @@
-<div class="max-w-[1260px] mx-auto px-4 md:px-6 py-8">
+<div class="max-w-[1260px] mx-auto max-md:px-4 py-8">
   <!-- Header with Title and Filter Toggle Button -->
   <div class="flex justify-between items-center mb-4">
-    <h1 class="text-2xl font-medium">პროდუქცია</h1>
+    <div class="lg:hidden text-2xl font-medium">პროდუქცია</div>
+    <div class="hidden lg:block relative w-[266px] h-[67px]">
+      <img
+        src="assets/one-three.png"
+        alt="third"
+        class="w-full h-full object-cover rounded-[20px]"
+      />
+      <div class="absolute inset-0 bg-custom-gradient rounded-[20px]"></div>
+      <span
+        class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-white font-black text-2xl px-[52px] py-[19px] whitespace-nowrap"
+      >
+        პროდუქცია
+      </span>
+    </div>
     <button
       (click)="toggleFilters()"
-      class="w-10 h-10 rounded-lg bg-blue-600 flex items-center justify-center text-white md:hidden"
+      class="w-10 h-10 rounded-lg bg-blue-600 flex items-center justify-center text-white md:hidden cursor-pointer"
     >
       <i class="fa-solid fa-sliders"></i>
     </button>

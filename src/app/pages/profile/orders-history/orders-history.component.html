@@ -9,11 +9,11 @@
   <div class="w-full max-w-3xl mx-auto mt-6">
     @for (order of mockOrders; track order.orderId) {
       <div
-        class="order-card flex flex-col gap-[10px] rounded-2xl border border-gray-200 p-5 transition-all duration-300 mb-4"
+        class="order-card flex flex-col gap-[10px] rounded-2xl border border-gray-200 transition-all duration-300 mb-4"
       >
         <!-- Order Summary Header (Always visible) -->
         <div
-          class="flex flex-col lg:flex-row max-lg:gap-[10px] justify-between pb-4 border-b border-gray-200 cursor-pointer"
+          class="flex flex-col lg:flex-row max-lg:gap-[10px] justify-between py-[15px] px-12px px-[20px] py-[15px] border-b border-gray-200 cursor-pointer"
           (click)="toggle(order.orderId)"
         >
           <div class="flex flex-row lg:flex-col gap-2">
@@ -53,14 +53,14 @@
               >
                 <div class="flex items-center justify-between">
                   <img
-                    [src]="unit.images[0]"
+                    [src]="unit?.images?.[0]"
                     alt="sadgisi logo"
-                    class="w-[139px] h-[122px] md:w-[192px] md:h-[122px]"
+                    class="w-[139px] h-[122px] md:w-[192px] md:h-[122px] object-cover"
                   />
-                  <div class="flex flex-col pl-5 md:pl-4">
+                  <div class="flex flex-col pl-4 md:pl-5">
                     <span
                       class="font-medium text-[14px] text-[#0A0B26] md:text-[16px]"
-                      >სახელი: {{ unit.name }}
+                      >{{ unit.name }}
                       <span
                         class="inline-block rounded-full cursor-pointer w-[13px] h-[13px] lg:w-[18px] lg:h-[18px]"
                       >
@@ -71,7 +71,7 @@
                       >ფერი:
                       <span
                         class="inline-block rounded-full cursor-pointer w-[13px] h-[13px] lg:w-[18px] lg:h-[18px]"
-                        [style.backgroundColor]="unit.colors[0]"
+                        [style.backgroundColor]="unit?.colors?.[0]"
                       >
                       </span>
                     </span>
@@ -83,12 +83,12 @@
                       (click)="deleteProduct()"
                     >
                       <i class="fa-solid fa-trash"></i>
-                      <span class="text-sm font-medium"
-                        >შეტყობინებების წაშლა</span
+                      <span class="text-sm text-[12px] md:text-[14px]"
+                        >პროდუქტის წაშლა</span
                       >
                     </button>
                   </div>
-                  <div class="flex flex-col gap-3">
+                  <div class="flex flex-col gap-3 absolute right-3">
                     <div
                       class="font-medium text-[14px] text-[#0A0B26] md:font-bold md:text-[18px] md:text-[#0D0E2D] whitespace-pre max-lg:hidden"
                     >

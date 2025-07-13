@@ -1,10 +1,9 @@
 <!-- profile-layout.component.html -->
 
-<div class="max-w-[1260px] mx-auto px-4 md:px-6 py-8 overflow-x-hidden">
-  <div class="grid md:grid-cols-[300px_1fr] md:gap-12">
-    <!-- Sidebar (show conditionally) -->
+<div class="max-w-[1260px] mx-auto px-4 py-8 overflow-x-hidden">
+  <div class="flex flex-col gap-10 lg:flex-row">
     <div
-      class="bg-white rounded-2xl border border-gray-200 py-[27px] px-[20px] h-fit hidden md:block"
+      class="bg-white rounded-2xl border border-gray-200 py-[27px] px-[20px] h-fit"
     >
       <nav>
         <ul class="space-y-[20px]">
@@ -26,7 +25,7 @@
     </div>
 
     <!-- Content -->
-    <div class="bg-white w-full">
+    <div class="bg-white w-full overflow-x-hidden">
       <router-outlet></router-outlet>
     </div>
   </div>

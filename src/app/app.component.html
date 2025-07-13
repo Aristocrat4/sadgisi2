@@ -1,13 +1,12 @@
 <div class="flex flex-col min-h-screen overflow-hidden">
   <app-header class="w-full"></app-header>
-  <main class="grow w-full lg:px-[90px]">
-    @if (!isOpen) {
-      <router-outlet [hidden]="isOpen"></router-outlet>
-    } @else {
+  <main class="grow w-full h-full lg:px-[90px]">
+    <div [hidden]="isOpen">
+      <router-outlet></router-outlet>
+    </div>
+    <div [hidden]="!isOpen">
       <app-sidebar></app-sidebar>
-    }
+    </div>
   </main>
-  <app-footer
-    class="h-[200px] max-[1260px]:h-[351px] bg-[#F5F5F5] w-full"
-  ></app-footer>
+  <app-footer class="bg-[#F5F5F5] w-full"></app-footer>
 </div>

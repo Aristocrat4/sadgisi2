@@ -7,10 +7,11 @@ import {
 import { CommonModule } from '@angular/common';
 import { QuestionsComponent } from '../../shared/questions/questions.component';
 import { BasketProduct, BasketService } from '../../services/basket.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ProductListService } from '../../services/product-services/productsList.service';
 import { Product } from '../../interfaces/product.interface';
 import { FavoritesService } from '../../services/product-services/favoritesList.service';
+
 @Component({
   selector: 'app-product-details',
   standalone: true,
@@ -21,7 +22,9 @@ import { FavoritesService } from '../../services/product-services/favoritesList.
 export class ProductDetailsComponent implements OnInit {
   product: Product | undefined;
   selectedColorIndex: number | null = null;
+  currentImageIndex: number = 0;
 
+  readonly #router = inject(Router);
   readonly #activatedRoute = inject(ActivatedRoute);
   readonly #productService = inject(ProductListService);
   readonly #basketService = inject(BasketService);
@@ -34,6 +37,7 @@ export class ProductDetailsComponent implements OnInit {
     if (productId !== null) {
       this.#productService.getProductById(productId).subscribe((product) => {
         this.product = product;
+        this.currentImageIndex = 0;
       });
     }
   }
@@ -58,5 +62,26 @@ export class ProductDetailsComponent implements OnInit {
     return this.product
       ? this.#favoritesService.isFavorite(this.product.id)
       : false;
+  }
+
+  navigateCheckout() {
+    this.#router.navigate(['/checkout']);
+  }
+
+  nextImage(): void {
+    if (!this.product?.images) return;
+    this.currentImageIndex =
+      (this.currentImageIndex + 1) % this.product.images.length;
+  }
+
+  prevImage(): void {
+    if (!this.product?.images) return;
+    this.currentImageIndex =
+      (this.currentImageIndex - 1 + this.product.images.length) %
+      this.product.images.length;
+  }
+
+  goToImage(index: number): void {
+    this.currentImageIndex = index;
   }
 }
